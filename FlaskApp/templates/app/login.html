@@ -1,0 +1,20 @@
+{% extends '/components/forms-base.html' %}
+{% block title %}<title>Realize seu Login</title>{% endblock %}
+{% block content %}
+<div class="form">
+  <div class="row logo-container">
+    <h1>Logo aqui</h1>
+  </div>
+  <div class="row">
+    <label for="login" class="form-label">Email</label>
+    <input type="text" name="login" id="login" class="form-input" placeholder="Insira seu Email">
+  </div>
+  <div class="row">
+    <label for="password" class="form-label">Senha</label>
+    <input type="text" name="password" id="password" class="form-input" placeholder="Insira sua Senha">
+  </div>
+  <div class="row">
+    <button id="submit">Fazer Login</button>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends '/components/base.html' %}
+
+{% block title %}<title>Dashboard</title>{% endblock %}
+{% block content %}
+<div class="company-info">
+  <h1>Logo + </h1>
+  <h1 style="margin-left: 10px;">Nome da empresa</h1>
+</div>
+<div class="table-container">
+  <table id="table_id" class="display">
+    <thead>
+      <th>ID</th>
+      <th>Nome</th>
+      <th>Quantidade</th>
+      <th>Lote</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>001</td>
+        <td data-id="001" class="name-item">Bla</td>
+        <td>827</td>
+        <td>08/22</td>
+        <td><button data-id="001" class="edit-item"><img src="{{url_for('static', filename='images/pencil-alt.svg')}}"
+              alt="Edit"></button></td>
+      </tr>
+      <tr>
+        <td>002</td>
+        <td data-id="002" class="name-item">Bleght</td>
+        <td>414</td>
+        <td>02/22</td>
+        <td><button data-id="002" class="edit-item"><img src="{{url_for('static', filename='images/pencil-alt.svg')}}"
+              alt="Edit"></button></td>
+      </tr>
+      <tr>
+        <td>003</td>
+        <td data-id="003" class="name-item">Dipirona</td>
+        <td>387</td>
+        <td>05/22</td>
+        <td><button data-id="003" class="edit-item"><img src="{{url_for('static', filename='images/pencil-alt.svg')}}"
+              alt="Edit"></button></td>
+      </tr>
+      <tr>
+        <td>004</td>
+        <td data-id="004" class="name-item">RedPill</td>
+        <td>387</td>
+        <td>05/22</td>
+        <td><button data-id="004" class="edit-item"><img src="{{url_for('static', filename='images/pencil-alt.svg')}}"
+              alt="Edit"></button></td>
+      </tr>
+      <tr>
+        <td>005</td>
+        <td data-id="005" class="name-item">Blyat</td>
+        <td>387</td>
+        <td>05/22</td>
+        <td><button data-id="005" class="edit-item"><img src="{{url_for('static', filename='images/pencil-alt.svg')}}"
+              alt="Edit"></button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+{% endblock %}

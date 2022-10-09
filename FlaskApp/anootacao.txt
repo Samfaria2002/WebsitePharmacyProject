@@ -1,0 +1,64 @@
+ var obj = $('#');
+    obj.DataTable(
+        {
+            "ordering": false, // Habilita|Desabilita a ordenação
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+            },
+            deferRender: true,
+            ordering: true,
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'pdfHtml5',
+                    download: 'open',
+                    text: 'Exportar PDF',
+                    exportOptions: {
+                        modifier: {
+                            page: 'current'
+                        }
+                    },
+                    orientation: "landscape",
+                    messageTop: "Contratos referentes ao mês " + document.getElementById("mes").value + " de " + document.getElementById("ano").value,
+                    //Para ficar abaixo da tabela
+                    //messageBottom: function () { return new Date().toString() },
+                    customize: function (doc) {
+                        var now = new Date();
+                        var jsDate = now.getDate() + '-' + (now.getMonth() + 1) + '-' + now.getFullYear();
+                        // Set page margins [left,top,right,bottom] or [horizontal,vertical]
+                        doc.pageMargins = [20, 60, 20, 30];
+                        doc.defaultStyle.fontSize = 11;
+                        doc.styles.tableHeader.fontSize = 12;
+                        var logo = 'data:image/png;base64,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';
+                        doc['header'] = (function () {
+                            return {
+                                columns: [
+                                    {
+                                        image: logo,
+                                        width: 24
+                                    },
+                                    {
+                                        alignment: 'left',
+                                        italics: true,
+                                        text: 'SAE TOWERS',
+                                        fontSize: 18,
+                                        margin: [10, 0]
+                                    },
+                                    {
+                                        alignment: 'right',
+                                        fontSize: 14,
+                                        text: 'Relatório de Empréstimos Bancários da SAE TOWERS'
+                                    }
+                                ],
+                                margin: 20
+                            }
+                        });
+                    }
+                }
+            ],
+            responsive: true,
+            pageLength: 10,
+            lengthChange: false, // Habilita|Desabilita alteração de quantidade de linhas
+            search: true, // Habilita|Desabilita a pesquisa
+        }
+    );
