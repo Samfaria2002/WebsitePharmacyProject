@@ -76,3 +76,7 @@ body {
 #submit:hover {
   opacity: 0.8;
 }
+
+.logo-img{
+  width: 150px;
+}

@@ -50,11 +50,19 @@
   <div class="container">
     <div class="sidebar">
       <div class="logo-app">
-        <h1>logo aqui</h1>
+        <img class="logo-img" src="/static/images/LogoHelpPharm.png"">
       </div>
       <div class="sidebar-item" id="add-item">Adicionar Item</div>
       <!-- <div class="sidebar-item" id="remove-item">Remover Item</div> -->
+      <div class="sidebar-item" id="estoque">Estoque</div>
+
+      <div class="sidebar-item" id="solicitacoes">Solicitações</div>
+
       <div class="sidebar-item" id="relatorios">Relatorios</div>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-item" id="logoff">Logoff</div>
+      </div>
     </div>
     <div class="content">
       {% block content %}{% endblock %}
@@ -286,6 +294,18 @@
     document.querySelector('#modal-content form').setAttribute('action', '/api/add-item')
 
   })
+
+  document.querySelector('#solicitacoes').addEventListener('click', () => {
+    location.href = "solicitacoes"
+  })
+
+  document.querySelector('#estoque').addEventListener('click', () => {
+    location.href = "/"
+  }) 
+
+  document.querySelector('#logoff').addEventListener('click', () => {
+    location.href = "login"
+  }) 
 
 
   document.querySelectorAll('.edit-item').forEach((el, i) => {
