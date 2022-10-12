@@ -38,6 +38,19 @@ def solicitacoes():
 def err():
     return jsonify({'status': 'Not found hehe'}), 404
 
+
+
+# db routes
+
+@app.route('/teste')
+def test_url():
+    #data = Teste.query.all() # considerar passar var p/ jsonify após "limpeza" do que será enviado
+    #return jsonify(data = Teste.query.all())
+    return jsonify({'status': 'ok'})
+
+
+
+
 if __name__ == '__main__':
     # db.create_all()
     app.run(debug = True)
