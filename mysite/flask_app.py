@@ -23,8 +23,8 @@ assets.register('main_scss', main)
     * botar a index do Little Samuca p/ rodar (em cima da rota '/')
     * preparar o mobile via react-native
     * mudar aquele btn de delete do modal depois
-    * preparar pull request pro pythonanywhere -- masi ou menos feito
-    * utilização de scss p/ facilidade de utilização de styles
+    * preparar pull request pro pythonanywhere -- mais ou menos feito
+    * utilização de scss p/ facilidade de utilização de styles -- ok
 
 '''
 
