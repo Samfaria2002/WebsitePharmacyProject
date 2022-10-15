@@ -1,53 +1,64 @@
-<html lang="pt-br">
+{% extends '/components/main-base.html' %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  {% block title %}{% endblock %}
+{% block title %}{% endblock %}
+
+{% block assets %}
+  <!-- 
   <link rel="stylesheet" href="{{url_for('static', filename='stylesheet/main.css')}}">
   <link rel="stylesheet" href="{{url_for('static', filename='stylesheet/base-file.css')}}">
-
+  -->
+  {% assets "main_scss" %}
+    <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
+  {% endassets %}
+  {% assets "base_scss" %}
+    <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
+  {% endassets %}
   <script src="https://code.jquery.com/jquery-3.6.1.min.js"
     integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 
-</head>
+{% endblock %}
+
 
 <body>
 
-  <div class="modal" id="modal">
-    <div class="modal-container">
-      <h1 id="modal-title">Welcome</h1>
-      <div id="modal-content">
-        <form class="form" method="" action="">
-          <div class="row hidden">
-            <label for="id-item" class="form-label">ID do Item</label>
-            <input type="text" name="id-item" id="id-item" class="form-input" placeholder="Exemplo: 001" disabled>
-          </div>
-          <div class="row">
-            <label for="nome-item" class="form-label">Nome do Item</label>
-            <input type="text" name="nome-item" id="nome-item" class="form-input" placeholder="Exemplo: Dipirona">
-          </div>
-          <div class="row">
-            <label for="qtd-item" class="form-label">Quantidade</label>
-            <input type="text" name="qtd-item" id="qtd-item" class="form-input" placeholder="Exemplo: 999">
-          </div>
-          <div class="row" id="delete-item">
-            <button id="delete-btn">Deletar</button>
-          </div>
-          <div class="modal-buttons">
-            <button class="btn-secondary" id="modal-skip">Cancelar</button>
-            <button class="btn-primary" id="modal-complete" type="submit">Adicionar</button>
-          </div>
-        </form>
+
+  {% block modal %}
+    <div class="modal" id="modal">
+      <div class="modal-container">
+        <h1 id="modal-title">Welcome</h1>
+        <div id="modal-content">
+          <form class="form" method="" action="">
+            <div class="row hidden">
+              <label for="id-item" class="form-label">ID do Item</label>
+              <input type="text" name="id-item" id="id-item" class="form-input" placeholder="Exemplo: 001" disabled>
+            </div>
+            <div class="row">
+              <label for="nome-item" class="form-label">Nome do Item</label>
+              <input type="text" name="nome-item" id="nome-item" class="form-input" placeholder="Exemplo: Dipirona">
+            </div>
+            <div class="row">
+              <label for="qtd-item" class="form-label">Quantidade</label>
+              <input type="text" name="qtd-item" id="qtd-item" class="form-input" placeholder="Exemplo: 999">
+            </div>
+            <div class="row" id="delete-item">
+              <button id="delete-btn">Deletar</button>
+            </div>
+            <div class="modal-buttons">
+              <button class="btn-secondary" id="modal-skip">Cancelar</button>
+              <button class="btn-primary" id="modal-complete" type="submit">Adicionar</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
+  {% endblock %}
 
-  <div class="container">
+
+  {% block baseContent %}
+
     <div class="sidebar">
       <div class="logo-app">
         <img class="logo-img" src="/static/images/LogoHelpPharm.png">
@@ -60,6 +71,8 @@
 
       <div class="sidebar-item" id="relatorios">Relatorios</div>
 
+      <div class="sidebar-item" id="cadastro">Cadastrar funcionário</div>
+
       <div class="sidebar-footer">
         <div class="sidebar-item" id="logoff">Logoff</div>
       </div>
@@ -68,12 +81,12 @@
       {% block content %}{% endblock %}
     </div>
 
-  </div>
+  {% endblock %}
+
 </body>
 
-</html>
-
-<script>
+{% block scripts %}
+  <script>
 
   const modal = document.getElementById("modal");
   const cancelModal = document.getElementById("modal-skip");
@@ -95,16 +108,22 @@
   })
 
   document.querySelector('#solicitacoes').addEventListener('click', () => {
-    location.href = "solicitacoes"
+    location.href = 'solicitacoes'
   })
 
   document.querySelector('#estoque').addEventListener('click', () => {
-    location.href = "/"
+    location.href = '/'
   }) 
 
   document.querySelector('#logoff').addEventListener('click', () => {
-    location.href = "login"
+    location.href = 'login'
   }) 
+
+  document.querySelector('#cadastro').addEventListener('click', () => {
+    location.href = 'cadastro'
+  }) 
+
+
 
 
   document.querySelectorAll('.edit-item').forEach((el, i) => {
@@ -143,9 +162,9 @@
   })
 
 
-</script>
+  </script>
 
-<script>
+  <script>
   $(document).ready(function () {
     $('#table_id').DataTable({
       language: {
@@ -153,4 +172,6 @@
       },
     })
   })
-</script>
+  </script>
+{% endblock %}
+

@@ -1,14 +1,27 @@
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  {% block title %}{% endblock %}
+{% extends '/components/main-base.html' %}
+
+{% block title %}{% endblock %}
+{% block assets %}
+  <!--
   <link rel="stylesheet" href="{{url_for('static', filename='stylesheet/main.css')}}">
-</head>
-<body>
-  <div class="container">
-    {% block content %} {% endblock %}
-  </div>
-</body>
-</html>
+  -->
+  {% assets "main_scss" %}
+    <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
+  {% endassets %}
+
+{% endblock %}
+  
+{% block baseContent %}
+
+{% block content %} {% endblock %}
+
+{% endblock %}
+
+{% block scripts %} 
+<script>
+  // só para mostrar no protótipo
+  document.querySelector('#submit').addEventListener('click', () => {
+    window.location.href = '/'
+  })
+</script>
+{% endblock %}

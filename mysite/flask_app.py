@@ -1,19 +1,30 @@
 from flask import Flask
-from flask import render_template, jsonify, request, session, redirect, url_for
+from flask import render_template, jsonify
+from flask_assets import Environment, Bundle
 
 app = Flask(__name__)
 
+assets = Environment(app)
+#assets.url = app.static_url_path
+# static/stylesheet/
+base = Bundle('stylesheet/base-file.scss', filters='pyscss,cssmin', output='stylesheet/base-file.css')
+main = Bundle('stylesheet/main.scss', filters='pyscss,cssmin', output='stylesheet/main.css')
+assets.register('base_scss', base)
+assets.register('main_scss', main)
+
+
 '''
 
-    * possível refatoramento/abstração da base e do index/solicitacoes --> base c/ sidebar + content --> extend p/ --> base + logo c/ table que será usado p/ index e solicitacoes
+    * possível refatoramento/abstração da base e do index/solicitacoes --> base c/ sidebar + content --> extend p/ --> base + logo c/ table que será usado p/ index e solicitacoes --ok
     * criar dashboard de admin p/ visualização de user/req, etc
-    * definir quais campos serão necessários para as tabelas do backend
-    * construir todo o banco de dados e criar os métodos via sqlAlchemy
+    * definir quais campos serão necessários para as tabelas do backend -- ok
+    * construir todo o banco de dados e criar os métodos via sqlAlchemy -- templates de banco feita, falta sqlAlchemy
     * setar .env p/ esconder informações sigilosas >:D
     * botar a index do Little Samuca p/ rodar (em cima da rota '/')
     * preparar o mobile via react-native
     * mudar aquele btn de delete do modal depois
-    * preparar pull request pro pythonanywhere
+    * preparar pull request pro pythonanywhere -- masi ou menos feito
+    * utilização de scss p/ facilidade de utilização de styles
 
 '''
 
@@ -37,6 +48,19 @@ def solicitacoes():
 @app.route('/error')
 def err():
     return jsonify({'status': 'Not found hehe'}), 404
+
+
+
+
+''' Banco de dados  '''
+
+
+
+
+
+
+
+
 
 
 
