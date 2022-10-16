@@ -65,8 +65,9 @@ def err():
 
 ''' Banco de dados  '''
 
-
-load_dotenv()  # take environment variables from .env.
+BASEDIR = os.path.abspath(os.path.dirname(__file__))
+# Connect the path with your '.env' file name
+load_dotenv(os.path.join(BASEDIR, '.env'))
 
 app.config["DEBUG"] = True
 
