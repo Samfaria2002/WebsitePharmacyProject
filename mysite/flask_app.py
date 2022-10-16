@@ -130,7 +130,6 @@ products_schema = ProductSchema(many=True)
 @app.route('/teste')
 def test_url():
     res = products_schema.dump(Pharmacy.query.all())
-    print(res)
     return jsonify(res)
 
 
