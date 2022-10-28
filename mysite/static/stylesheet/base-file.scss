@@ -1,3 +1,5 @@
+// usado no app em si
+
 $primary_color: #0e48fe;
 //$secondary_color: #7bb7e0;
 .container {
@@ -21,11 +23,16 @@ $primary_color: #0e48fe;
   cursor: pointer;
 }
 
+.sidebar-item.active {
+  background-color: $primary_color;
+  color: white;
+}
+
 .sidebar-item:hover,
 .sidebar-item:focus-visible {
   background-color: $primary_color;
   color: white;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .content {

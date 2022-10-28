@@ -173,5 +173,22 @@
     })
   })
   </script>
+
+
+  <script>
+    ;(() => {
+      let page = window.location.pathname
+      switch(page) {
+        case '/':
+          document.querySelector('#estoque').classList.add('active')
+        break;
+        default:
+          page = page.replace(/\//g, '')
+          document.querySelector(`#${page}`).classList.add('active')
+        break;
+      }
+
+    })()
+  </script>
 {% endblock %}
 

@@ -9,6 +9,10 @@ views = Blueprint('views', __name__)
 def index():
     return render_template('/app/index.html')
 
+@views.route('/estoque')
+def estoque():
+    return render_template('/app/index.html')
+
 @views.route('/cadastro')
 def cadastro():
     return render_template('/app/cadastro.html')
