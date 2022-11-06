@@ -1,0 +1,257 @@
+/*
+Pedir ajuda pro magician Leo pra usar o sass.
+
+azul bonito: #7bb7e0
+#c80707
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Raleway', sans-serif;
+}
+
+html, body{
+    width: 100%;
+    height: 100%;
+}
+
+/*Classes for support*/
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2%;
+}
+
+.clear{clear: both;}
+
+.center{text-align: center;}
+
+/*Page Style init*/
+
+/*Header and main section*/
+
+.main{
+    height: 100%;
+    background-image: linear-gradient(#7bb7e0 60%,white 130%);
+}
+
+/*Header*/
+
+header{
+    overflow: hidden;
+}
+
+.container > div{
+    padding-top: 10px;
+}
+
+.logo{
+    float: left;
+}
+
+.logo > a > img{
+    width: 230px;
+    height: 55px;
+}
+
+nav.nav-cabecalho{
+    float: right;
+}
+
+nav.nav-cabecalho > ul{
+    position: relative;
+    list-style: none;
+    margin-top: 15px;
+}
+
+nav.nav-cabecalho > ul > li{
+    display: inline-block;
+    padding: 0 20px;
+}
+
+nav.nav-cabecalho > ul > li > a{
+    color: white;
+    text-decoration: none;
+}
+
+#box-entrar{
+    background-color: white;
+    border-radius: 15px;
+    width: 80px;
+    height: 30px;
+    position: relative;
+    top: 9px;
+}
+
+nav.nav-cabecalho > ul > li:nth-child(4) > a{
+    color: #c80707;
+    font-weight: bold;
+    position: absolute;
+    top: 16px;
+    right: 27px;
+}
+
+/*Menu mobile*/
+
+nav.nav-mobile{
+    display: none;
+    float: right;
+}
+
+nav.nav-mobile h2{
+    cursor: pointer;
+}
+
+nav.nav-mobile ul{
+    display: none;
+    width: 100%;
+    background: white;
+    position: absolute;
+    left: 0px;
+    top: 50px;
+    z-index: 999;
+    text-align: center;
+}
+
+nav.nav-mobile li{
+    padding: 8px 0;
+    border-bottom: 1px solid #7bb7e0;
+}
+
+nav.nav-mobile a{
+    color: #7bb7e0;
+    text-decoration: none;
+}
+
+/*Div main-description*/
+
+.main-description{
+    margin-top: 73px;
+}
+
+.main-description > p{
+    color: white;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 80px;
+}
+
+div.grid-topics{
+    margin-top: 70px;
+    display: grid;
+    grid-area: 
+    'a b'
+    'a b';
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    grid-row-gap: 60px;
+}
+
+div.grid-topics > div{
+    display: flex;
+}
+
+div.grid-topics > div > i{
+    font-size: 27px;
+    color: white;
+}
+
+div.grid-topics > div > p{
+    margin-top: 5px;
+    margin-left: 20px;
+    font-size: 18px;
+    font-weight: 500;
+    color: white;
+    text-shadow: 2px 2px #7bb7e0;
+}
+
+.bttn-comece{
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+#box-comece{
+    margin-top: 50px;
+    background-color: white;
+    width: 130px;
+    height: 33px;
+    border-radius: 15px;
+    position: relative;
+}
+
+#box-comece > a{
+    position: absolute;
+    color: #c80707;
+    font-weight: bold;
+    font-size: 18px;
+    text-decoration: none;
+    padding-top: 6px;
+    padding-left: 15px;
+}
+
+/*Responsive*/
+
+@media screen and (max-width: 710px){
+    
+    .logo > a > img{
+        width: 190px;
+        height: 47px;
+    }
+
+    nav.nav-cabecalho > ul > li{
+        padding: 0;
+        margin-left: 5px;
+    }
+
+    nav.nav-cabecalho > ul > li:nth-child(4) > a{
+        right: 9px;
+    }
+
+    nav.nav-mobile ul{
+        margin-top: 30px;
+    }
+
+    /*Div main-description*/
+
+    .main-description{
+        margin-top: 20px;
+    }
+
+    .main-description > p{
+        font-weight: 400;
+        font-size: 40px;
+        line-height: 60px;
+    }
+}
+
+
+@media screen and (max-width: 550px){
+    .logo > a > img{
+        width: 190px;
+        height: 47px;
+    }
+
+    nav.nav-cabecalho{
+        display: none;
+    }
+
+    nav.nav-mobile{
+        display: block;
+        margin-top: 17px;
+    }
+
+    nav.nav-mobile > h2{
+        color: white;
+    }
+
+    /*Div main-description*/
+
+    .main-description{
+        margin-top: 20px;
+    }
+}
