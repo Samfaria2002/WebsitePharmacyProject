@@ -5,9 +5,9 @@ from tables import Pharmacy, pharmacies_schema
 
 views = Blueprint('views', __name__)
 
-@views.route('/')
+@views.route('/home')
 def index():
-    return render_template('/app/index.html')
+    return render_template('/app/home.html')
 
 @views.route('/estoque')
 def estoque():
