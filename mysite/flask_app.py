@@ -2,7 +2,7 @@ from flask import Flask
 from flask_assets import Environment, Bundle
 import os
 from dotenv import load_dotenv
-from views import views
+from routes import routes
 from extensions import db, migrate, ma
 
 app = Flask(__name__)
@@ -32,7 +32,7 @@ main = Bundle('stylesheet/main.scss', filters='pyscss,cssmin', output='styleshee
 assets.register('base_scss', base)
 assets.register('main_scss', main)
 
-app.register_blueprint(views)
+app.register_blueprint(routes)
 
 if __name__ == '__main__':
     with app.app_context():

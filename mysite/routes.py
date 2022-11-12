@@ -1,36 +1,40 @@
 from flask import Blueprint
-from flask import render_template, jsonify
+from flask import render_template, jsonify, redirect
 from extensions import db # p/ uso futuro em cenários de add/delete/update
 from tables import Pharmacy, pharmacies_schema
 
-views = Blueprint('views', __name__)
+routes = Blueprint('routes', __name__)
 
-@views.route('/home')
+@routes.route('/')
 def index():
+    return redirect('/home')
+
+@routes.route('/home')
+def home():
     return render_template('/app/home.html')
 
-@views.route('/estoque')
+@routes.route('/estoque')
 def estoque():
-    return render_template('/app/index.html')
+    return render_template('/app/estoque.html')
 
-@views.route('/cadastro')
+@routes.route('/cadastro')
 def cadastro():
     return render_template('/app/cadastro.html')
 
-@views.route('/login')
+@routes.route('/login')
 def login():
     return render_template('/app/login.html')
 
-@views.route('/solicitacoes')
+@routes.route('/solicitacoes')
 def solicitacoes():
     return render_template('/app/solicitacoes.html')
 
-@views.route('/error')
+@routes.route('/error')
 def err():
     return jsonify({'status': 'Not found hehe'}), 404
 
 
-@views.route('/teste')
+@routes.route('/teste')
 def test_url():
     res = pharmacies_schema.dump(Pharmacy.query.all())
     return jsonify(res)
