@@ -12,16 +12,15 @@ class Pharmacy(db.Model):
   cidade = db.Column(db.String(100))
   bairro = db.Column(db.String(100))
   rua = db.Column(db.String(100))
-  numero_endereco = db.Column(db.String(6))
-  #cep = db.Column(db.Numeric(8, asdecimal=False))
-  cep = db.Column(db.Integer)
-  latitude = db.Column(db.String(256))
-  longitude = db.Column(db.String(256))
-  #telefone
+  #numero_endereco = db.Column(db.String(6))
+  cep = db.Column(db.String(9)) # 8 digitos + 1 '-'
+  latitude = db.Column(db.Numeric(13,10)) # vai ser 18,15 dps >:D
+  longitude = db.Column(db.Numeric(13,10))
+  telefone = db.Column(db.String(14)) # (10)98765-4321
 
 class PharmacySchema(ma.Schema):
   class Meta:
-    fields = ('pharmacyId', 'name', 'logo', 'pais', 'uf', 'cidade', 'bairro', 'rua', 'numero_endereco', 'cep', 'latitude', 'longitude')
+    fields = ('pharmacyId', 'name', 'logo', 'pais', 'uf', 'cidade', 'bairro', 'rua', 'numero_endereco', 'cep', 'latitude', 'longitude', 'telefone')
 
 # Init schema
 pharmacy_schema = PharmacySchema()
