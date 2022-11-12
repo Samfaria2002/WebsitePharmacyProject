@@ -1,5 +1,5 @@
 from extensions import db, ma
-
+from marshmallow import fields
 class Pharmacy(db.Model):
 
   __tablename__ = "pharmacy"
@@ -19,9 +19,12 @@ class Pharmacy(db.Model):
   telefone = db.Column(db.String(14)) # (10)98765-4321
 
 class PharmacySchema(ma.Schema):
+  
+  latitude = fields.Decimal(as_string=True)
+  longitude = fields.Decimal(as_string=True)
   class Meta:
     fields = ('pharmacyId', 'name', 'logo', 'pais', 'uf', 'cidade', 'bairro', 'rua', 'numero_endereco', 'cep', 'latitude', 'longitude', 'telefone')
 
 # Init schema
-pharmacy_schema = PharmacySchema()
+#pharmacy_schema = PharmacySchema()
 pharmacies_schema = PharmacySchema(many=True)
