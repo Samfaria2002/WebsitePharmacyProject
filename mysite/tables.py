@@ -1,5 +1,26 @@
 from extensions import db, ma
 from marshmallow import fields
+
+class User(db.Model):
+  __tablename__ = "user"
+
+  userId = db.Column(db.Integer, primary_key=True, autoincrement=True)
+  userName = db.Column(db.String(99))
+  password = db.Column(db.String(99))
+  userType = db.Column(db.String(1))
+  name = db.Column(db.String(100))
+  birthDate = db.Column(db.Date)
+  sex = db.Column(db.String(1))
+  email = db.Column(db.String(99))
+  pharmacyId = db.Column(db.Integer, db.ForeignKey('pharmacy.pharmacyId'),nullable=True)
+  #orders = db.relationship('order', backref='person', lazy=True)
+  #recipes = db.relationship('recipe', backref='person', lazy=True)
+
+class UserSchema(ma.SQLAlchemyAutoSchema):
+  
+  class Meta:
+    model = User
+
 class Pharmacy(db.Model):
 
   __tablename__ = "pharmacy"
@@ -17,41 +38,19 @@ class Pharmacy(db.Model):
   latitude = db.Column(db.Numeric(13,10)) # vai ser 18,15 dps >:D
   longitude = db.Column(db.Numeric(13,10))
   telefone = db.Column(db.String(14)) # (10)98765-4321
-  users = db.relationship('user', backref='person', lazy=True)
-  remedys = db.relationship('remedy', backref='person', lazy=True)
+  #users = db.relationship('user', backref='person', lazy=True)
+  #remedys = db.relationship('remedy', backref='person', lazy=True)
 
 
-class PharmacySchema(ma.Schema):
+class PharmacySchema(ma.SQLAlchemyAutoSchema):
   
   latitude = fields.Decimal(as_string=True)
   longitude = fields.Decimal(as_string=True)
   class Meta:
-    fields = ('pharmacyId', 'name', 'logo', 'pais', 'uf', 'cidade', 'bairro', 'rua', 'numero_endereco', 'cep', 'latitude', 'longitude', 'telefone')
+    model = Pharmacy
 
 # Init schema
 #pharmacy_schema = PharmacySchema()
-
-
-class User(db.Model):
-  __tablename__ = "user"
-
-  userId = db.Column(db.Integer, primary_key=True, autoincrement=True)
-  userName = db.Column(db.String(99))
-  password = db.Column(db.string(99))
-  userType = db.Column(db.String(1))
-  name = db.Column(db.String(100))
-  birthDate = db.Column(db.Date)
-  sex = db.Column(db.String(1))
-  email = db.Column(db.String(99))
-  pharmacyId = db.Column(db.Integer, db.ForeignKey('pharmacy.pharmacyId'),nullable=True)
-  orders = db.relationship('order', backref='person', lazy=True)
-  recipes = db.relationship('recipe', backref='person', lazy=True)
-
-class UserSchema(ma.Schema):
-  
-  class Meta:
-    fields = ('userId','userName','password','userType','name','birthDate','sex','email','pharmacyId')
-
 class Inventary(db.Model):
   __tablename__ = "inventary"
 
@@ -60,10 +59,10 @@ class Inventary(db.Model):
   quantity = db.Column(db.Numeric(20,10))
   remedyId = db.Column(db.Integer, db.ForeignKey('remedy.remedyId'),nullable=False)
 
-class InventarySchema(ma.Schema):
-  
+class InventarySchema(ma.SQLAlchemyAutoSchema):
+  quantity = fields.Decimal(as_string=True)
   class Meta:
-    fields = ('inventaryId' ,'unitType' ,'quantity' ,'remedyId')
+    model = Inventary
 
 class Remedy(db.Model):
   __tablename__ = "remedy"
@@ -75,12 +74,12 @@ class Remedy(db.Model):
   barCode = db.Column(db.String(100))
   pharmacyId = db.Column(db.Integer, db.ForeignKey('pharmacy.pharmacyId'),nullable=False)
   inventaryId = db.Column(db.Integer, db.ForeignKey('inventary.inventaryId'),nullable=False)
-  inventary = db.relationship('inventary', backref='person', uselist=False, lazy=True)
+  #inventary = db.relationship('inventary', backref='person', uselist=False, lazy=True)
 
-class RemedySchema(ma.Schema):
-  
+class RemedySchema(ma.SQLAlchemyAutoSchema):
+  price = fields.Decimal(as_string=True)
   class Meta:
-    fields = ('remedyId','name','laboratory','price','barCode','pharmacyId','inventaryId')
+    model = Remedy
 
 class Recipe(db.Model):
   __tablename__ = "recipe"
@@ -90,14 +89,13 @@ class Recipe(db.Model):
   recipeType = db.Column(db.String(1))
   validity = db.Column(db.Date)
   userId = db.Column(db.Integer, db.ForeignKey('user.userId'),nullable=False)
-  recipeItens = db.relationship('recipeItem', backref='person', lazy=True)
-  orders = db.relationship('order', backref='person', lazy=True)
+  #recipeItens = db.relationship('recipeItem', backref='person', lazy=True)
+  #orders = db.relationship('order', backref='person', lazy=True)
 
-class RecipeSchema(ma.Schema):
+class RecipeSchema(ma.SQLAlchemyAutoSchema):
   
   class Meta:
-    fields = ('recipeId' ,'date' ,'recipeType' ,'validity','userId')
-
+    model = Recipe
 class RecipeItem(db.Model):
   __tablename__ = "recipeItem"
 
@@ -105,12 +103,12 @@ class RecipeItem(db.Model):
   name = db.Column(db.String(100))
   quantity = db.Column(db.Numeric(20,10))
   recipeId = db.Column(db.Integer, db.ForeignKey('recipe.recipeId'),nullable=False)
-  OrderItens = db.relationship('OrderItem', backref='person', lazy=True)
+  #OrderItens = db.relationship('OrderItem', backref='person', lazy=True)
 
-class RecipeItemSchema(ma.Schema):
-  
+class RecipeItemSchema(ma.SQLAlchemyAutoSchema):
+  quantity = fields.Decimal(as_string=True)
   class Meta:
-    fields = ('recipeItemId' ,'name' ,'quantity' ,'recipeId')
+    model = RecipeItem
 
 class Order(db.Model):
   __tablename__ = "order"
@@ -122,11 +120,12 @@ class Order(db.Model):
   pharmacyId = db.Column(db.Integer, db.ForeignKey('pharmacy.pharmacyId'),nullable=False)
   recipeId = db.Column(db.Integer, db.ForeignKey('recipe.recipeId'),nullable=True)
   userId = db.Column(db.Integer, db.ForeignKey('user.userId'),nullable=False)
-  orderItens = db.relationship('orderItem', backref='person', lazy=True)
+  #orderItens = db.relationship('orderItem', backref='person', lazy=True)
 
-class OrderSchema(ma.Schema):
+class OrderSchema(ma.SQLAlchemyAutoSchema):
+  totalValue = fields.Decimal(as_string=True)
   class Meta:
-    fields = ('orderId' ,'date' ,'orderType' ,'totalValue' ,'pharmacyId' ,'recipeId' ,'userId')
+    model = Order
 
 class OrderItem(db.Model):
   __tablename__ = "orderItem"
@@ -138,18 +137,18 @@ class OrderItem(db.Model):
   remedyId = db.Column(db.Integer, db.ForeignKey('remedy.remedyId'),nullable=False)
 
 
-class OrderItemSchema(ma.Schema):
-  
+class OrderItemSchema(ma.SQLAlchemyAutoSchema):
+  quantity = fields.Decimal(as_string=True)
   class Meta:
-    fields = ('orderItemId' ,'quantity' ,'orderId' ,'recipeItemId', 'remedyId')
+    model = OrderItem
 
 
-
+# pro futuro: tentar fazer as relationship funcionarem
 
 pharmacies_schema = PharmacySchema(many=True)
 users_schema = UserSchema(many=True)
-inventarys_schema = InventarySchema(many=True)
-remedys_schema = RemedySchema(many=True)
+inventaries_schema = InventarySchema(many=True)
+remedies_schema = RemedySchema(many=True)
 recipe_schema = RecipeSchema(many=True)
 recipeItem_schema = RecipeItemSchema(many=True)
 order_schema = OrderSchema(many=True)
