@@ -83,6 +83,14 @@ nav.nav-cabecalho > ul > li > a{
     text-decoration: none;
 }
 
+nav.nav-cabecalho > ul > li > a:hover{
+    text-decoration: underline;
+}
+
+nav.nav-cabecalho > ul > li > a:active{
+    color: #c80707;
+}
+
 #box-entrar{
     background-color: white;
     border-radius: 15px;
@@ -98,6 +106,10 @@ nav.nav-cabecalho > ul > li:nth-child(4) > a{
     position: absolute;
     top: 15px;
     right: 27px;
+}
+
+nav.nav-cabecalho > ul > li:nth-child(4) > a:hover{
+    text-decoration: none;
 }
 
 /*Menu mobile*/
@@ -135,10 +147,11 @@ nav.nav-mobile a{
 /*Div main-description*/
 
 .main-description{
-    margin-top: 73px;
+    margin-top: 0;
 }
 
 .main-description > p{
+    margin-top: 15vh;
     color: white;
     font-style: normal;
     font-weight: 400;
@@ -230,7 +243,7 @@ div.grid-topics > div > p{
     text-align: end;
     font-style: normal;
     font-weight: 400;
-    font-size: 50px;
+    font-size: 45px;
 }
 
 .grid > div:nth-child(2){
@@ -274,9 +287,85 @@ section.diagram > div > img{
     width: 60%;
     position: relative;
 }
+
+
+/*Section Form*/
+
+.form-section{
+    background-color: #7bb7e0;
+    padding-top: 30px;
+}
+
+.form-title{
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.form-title > span,p{
+    color: white;
+}
+
+.form-title > span{
+    font-size: 40px;
+}
+
+.form-title > p{
+    margin-top: 30px;
+    font-size: 30px;
+}
+
+.form-box{
+    max-width: 700px;
+}
+
+.form-box > form{
+    margin: 0;
+    display: flex;
+    transform: translate(36%, 0%);
+    flex-direction: column;
+}
+
+.form-box > form > label{
+    color: white;
+    margin-top: 35px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: 420;
+}
+
+.form-box > form > input,textarea{
+    height: 30px;
+    padding-left: 10px;
+    background-color: #d9d9d9;
+    border: none;
+    border-radius: 20px;
+    font-size: 17px;
+    outline: none;
+}
+
+.form-box > form > textarea{
+    resize: none;
+}
+
+.form-box > form > input:nth-child(9){
+    margin-top: 35px;
+    background-color: white !important;
+    color: #c80707;
+    font-weight: 600;
+    font-size: 20px;
+    cursor: pointer;
+}
+
 /*Responsive*/
 
 @media screen and (max-width: 1300px){
+
+    /*Section Main*/
+    .main-description > p{
+        margin-top: 15vh;
+        text-align: center;
+    }
+
     /*Section Diagram*/
 
     section.diagram > div > img{
