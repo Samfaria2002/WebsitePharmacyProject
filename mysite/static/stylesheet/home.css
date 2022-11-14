@@ -36,14 +36,17 @@ html, body{
 /*Header and main section*/
 
 .main{
-    height: 100%;
-    background-image: linear-gradient(#7bb7e0 60%,white 130%);
+    
+    background-image: linear-gradient(180deg, #7BB7E0 30.79%, rgba(123, 183, 224, 0) 136.16%);
 }
 
 /*Header*/
 
 header{
-    overflow: hidden;
+    position: sticky;
+    top: 0;
+    background-color: #7bb7e0;
+    z-index: 999999999;
 }
 
 .container > div{
@@ -92,7 +95,7 @@ nav.nav-cabecalho > ul > li:nth-child(4) > a{
     color: #c80707;
     font-weight: bold;
     position: absolute;
-    top: 16px;
+    top: 15px;
     right: 27px;
 }
 
@@ -138,7 +141,7 @@ nav.nav-mobile a{
     color: white;
     font-style: normal;
     font-weight: 400;
-    font-size: 50px;
+    font-size: 55px;
     line-height: 80px;
 }
 
@@ -165,7 +168,7 @@ div.grid-topics > div > i{
 div.grid-topics > div > p{
     margin-top: 5px;
     margin-left: 20px;
-    font-size: 18px;
+    font-size: 23px;
     font-weight: 500;
     color: white;
     text-shadow: 2px 2px #7bb7e0;
@@ -175,6 +178,7 @@ div.grid-topics > div > p{
     margin-top: 25px;
     display: flex;
     justify-content: center;
+    z-index: 1;
 }
 
 #box-comece{
@@ -196,7 +200,100 @@ div.grid-topics > div > p{
     padding-left: 15px;
 }
 
+/*Section Gestão Farmácias*/
+
+.pharmacy {
+    background-image: linear-gradient(360deg, #7BB7E0 30.79%, rgba(123, 183, 224, 0) 136.16%);
+    padding-top: 30px;
+}
+
+.grid{
+    display: grid;
+    grid-area: 'a b';
+    grid-template-columns: 50% 50%;
+}
+
+.grid > div:nth-child(1) > img{
+    margin-left: 15%;
+    margin-top: 130px;
+}
+
+.img-computer{
+    width: 400px;
+    height: 400px;
+}
+
+.grid > div:nth-child(2) > div.title-pharmacy{
+    color: white;
+    text-align: end;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+}
+
+.grid > div:nth-child(2){
+    display: block;
+    margin-top: 40px;
+}
+
+.icons-description{
+    display: flex;
+    margin-left: 50px;
+    margin-top: 70px;
+}
+
+.icons-description > i{
+    color: white;
+    font-size: 20px;
+}
+
+.icons-description > p{
+    color: white;
+    font-size: 23px;
+    text-shadow: 3px 2px #7bb7e0;
+    margin-left: 20px;
+    margin-top: -4px;
+}
+
 /*Responsive*/
+
+@media screen and (max-width: 1000px){
+
+    /*Section "Gestão Farmácias"*/
+
+    .grid{
+        display: grid;
+        grid-area: 
+        'a'
+        'b';
+        grid-template-columns: 100%;
+        grid-template-rows: 300px 100vh;
+    }
+
+    .grid > div:nth-child(1){
+        display: flex;
+        justify-content: center;
+    }
+
+    .grid > div:nth-child(1) > img{
+       margin: 0;
+    }
+
+    .img-computer{
+        width: 300px;
+        height: 300px;
+    }
+
+    .grid > div:nth-child(2) > div.title-pharmacy{
+        font-size: 40px;
+        text-align: center;
+    }
+
+    .icons-description{
+        justify-content: center;
+        margin-top: 50px;
+    }
+}
 
 @media screen and (max-width: 710px){
     
@@ -229,6 +326,7 @@ div.grid-topics > div > p{
         font-size: 40px;
         line-height: 60px;
     }
+
 }
 
 
@@ -255,5 +353,10 @@ div.grid-topics > div > p{
 
     .main-description{
         margin-top: 20px;
+    }
+
+    /*Section "Gestão Farmácias"*/
+    .grid > div:nth-child(2) > div.title-pharmacy{
+        font-size: 30px;
     }
 }
