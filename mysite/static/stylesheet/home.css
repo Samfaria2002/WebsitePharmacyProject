@@ -43,7 +43,8 @@ html, body{
 /*Header*/
 
 header{
-    position: sticky;
+    position: fixed;
+    width: 100%;
     top: 0;
     background-color: #7bb7e0;
     z-index: 999999999;
@@ -211,6 +212,7 @@ div.grid-topics > div > p{
     display: grid;
     grid-area: 'a b';
     grid-template-columns: 50% 50%;
+    padding-bottom: 6%;
 }
 
 .grid > div:nth-child(1) > img{
@@ -255,7 +257,33 @@ div.grid-topics > div > p{
     margin-top: -4px;
 }
 
+/*Section Diagram*/
+
+.diagram{
+    padding: 1% 2%;
+    max-width: 100%;
+}
+
+section.diagram > div{
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+section.diagram > div > img{
+    width: 60%;
+    position: relative;
+}
 /*Responsive*/
+
+@media screen and (max-width: 1300px){
+    /*Section Diagram*/
+
+    section.diagram > div > img{
+        width: 100%;
+        position: relative;
+    }
+}
 
 @media screen and (max-width: 1000px){
 
@@ -267,7 +295,8 @@ div.grid-topics > div > p{
         'a'
         'b';
         grid-template-columns: 100%;
-        grid-template-rows: 300px 100vh;
+        grid-template-rows: 300px 560px;
+        padding-bottom: 0%;
     }
 
     .grid > div:nth-child(1){
@@ -292,6 +321,13 @@ div.grid-topics > div > p{
     .icons-description{
         justify-content: center;
         margin-top: 50px;
+    }
+
+    /*Section Diagram*/
+
+    section.diagram > div > img{
+        width: 100%;
+        position: relative;
     }
 }
 
