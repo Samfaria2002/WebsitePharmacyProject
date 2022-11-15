@@ -2,9 +2,12 @@
 
     * Pedir ajuda pro magician Leo pra usar o sass.
     * To literalmente aqui fazendo um commit as 23hrs :D
+    * Mó doidera a gnt conversando pelo css né :D
 
     azul bonito: #7bb7e0
-    #c80707
+    vermelho legal: #c80707
+    cinza fraco: #d9d9d9
+    cinza forte: #acabab
 */
 
 * {
@@ -98,6 +101,10 @@ nav.nav-cabecalho > ul > li > a:active{
     height: 30px;
     position: relative;
     top: 9px;
+}
+
+nav.nav-cabecalho > ul > li:nth-child(4) > div{
+    cursor: pointer;
 }
 
 nav.nav-cabecalho > ul > li:nth-child(4) > a{
@@ -195,8 +202,18 @@ div.grid-topics > div > p{
     z-index: 1;
 }
 
+#box-comece:hover{
+    cursor: pointer;
+    background-color: #d9d9d9;
+}
+
+#box-comece:active{
+    background-color: #acabab;
+}
+
 #box-comece{
     margin-top: 50px;
+    margin-bottom: 40px;
     background-color: white;
     width: 130px;
     height: 33px;
@@ -212,6 +229,32 @@ div.grid-topics > div > p{
     text-decoration: none;
     padding-top: 6px;
     padding-left: 15px;
+}
+
+/*Section Sobre Nós*/
+
+.grid > div:nth-child(1){
+    margin-top: 5vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.title-about-grid{
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.about-description > p{
+    color: black;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 27px;
+}
+
+.image-about > img{
+    margin-left: 15%;
+    width: 470px;
+    height: 330px;
 }
 
 /*Section Gestão Farmácias*/
@@ -240,7 +283,7 @@ div.grid-topics > div > p{
 
 .grid > div:nth-child(2) > div.title-pharmacy{
     color: white;
-    text-align: end;
+    text-align: center;
     font-style: normal;
     font-weight: 400;
     font-size: 45px;
@@ -253,7 +296,7 @@ div.grid-topics > div > p{
 
 .icons-description{
     display: flex;
-    margin-left: 50px;
+    margin-left: 60px;
     margin-top: 70px;
 }
 
@@ -315,14 +358,18 @@ section.diagram > div > img{
 }
 
 .form-box{
-    max-width: 700px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .form-box > form{
-    margin: 0;
     display: flex;
-    transform: translate(36%, 0%);
     flex-direction: column;
+}
+
+.form-box > form > label,input,textarea{
+    width: 50vw;
 }
 
 .form-box > form > label{
@@ -334,7 +381,6 @@ section.diagram > div > img{
 }
 
 .form-box > form > input,textarea{
-    height: 30px;
     padding-left: 10px;
     background-color: #d9d9d9;
     border: none;
@@ -343,19 +389,64 @@ section.diagram > div > img{
     outline: none;
 }
 
-.form-box > form > textarea{
-    resize: none;
+.form-box > form > input{
+    height: 40px;
 }
 
-.form-box > form > input:nth-child(9){
+.form-box > form > textarea{
+    width: 50vw;
+    max-width: 50vw;
+}
+
+.form-box > form > button{
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 35px;
+    width: 200px;
+    height: 30px;
     background-color: white !important;
+    border: 0;
+    border-radius: 15px;
     color: #c80707;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 18px;
     cursor: pointer;
 }
 
+.form-box > form > button:hover{
+    background-color: #d9d9d9 !important;
+}
+
+.form-box > form > button:active{
+    background-color: #acabab !important;
+}
+
+.form-phrase{
+    margin-top: 10px;
+    text-align: center;
+}
+
+.form-phrase > p{
+    color: black;
+    font-weight: 500;
+}
+
+.form-phrase > p > a{
+    color: white;
+    text-decoration: none;
+}
+
+.form-phrase > p > a:hover{
+    text-decoration: underline;
+}
+
+.form-phrase > p > a:active{
+    color: #d9d9d9;
+}
+
+/**/
+/**/
+/**/
 /*Responsive*/
 
 @media screen and (max-width: 1300px){
@@ -376,6 +467,33 @@ section.diagram > div > img{
 
 @media screen and (max-width: 1000px){
 
+    /*Section Sobre Nós*/
+
+    section.about-us > div.container > div.grid{
+        grid-area: 
+        'a'
+        'b';
+        grid-template-columns: 100%;
+        grid-template-rows: 500px 170px;
+    }
+
+    .title-about-grid{
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .about-description{
+        text-align: center;
+    }
+
+    .image-about > img{
+        margin-top: -34vh;
+        transform: translate(10%, 0);
+        width: 470px;
+        height: 300px;
+        display: flex;
+    }
+    
     /*Section "Gestão Farmácias"*/
 
     .grid{
@@ -389,8 +507,8 @@ section.diagram > div > img{
     }
 
     .grid > div:nth-child(1){
-        display: flex;
-        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .grid > div:nth-child(1) > img{
@@ -452,6 +570,47 @@ section.diagram > div > img{
         line-height: 60px;
     }
 
+    /*Section Sobre Nós*/
+    section.about-us > div.container > div.grid{
+        grid-area: 
+        'a'
+        'b';
+        grid-template-columns: 100%;
+        grid-template-rows: 500px 170px;
+    }
+
+    .title-about-grid{
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .about-description{
+        text-align: center;
+    }
+
+    .image-about > img{
+        margin-top: -34vh;
+        width: 400px;
+        height: 300px;
+        display: flex;
+    }
+
+    /*Section Gestão Farmácias*/
+
+    .grid > div:nth-child(1){
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .grid > div:nth-child(2) > div.title-pharmacy{
+        font-size: 30px;
+    }
+
+    .icons-description > p{
+        font-size: 21px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 
@@ -480,8 +639,56 @@ section.diagram > div > img{
         margin-top: 20px;
     }
 
+    /*Section Sobre Nós*/
+
+    section.about-us > div.container > div.grid{
+        grid-area: 
+        'a'
+        'b';
+        grid-template-columns: 100%;
+        grid-template-rows: 500px 170px;
+    }
+
+    .title-about-grid{
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .about-description{
+        text-align: center;
+    }
+
+    .image-about > img{
+        margin-top: -23vh;
+        width: 350px;
+        height: 250px;
+        display: flex;
+    }
+
     /*Section "Gestão Farmácias"*/
+
     .grid > div:nth-child(2) > div.title-pharmacy{
         font-size: 30px;
+    }
+
+    .icons-description > p{
+        font-size: 19px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .grid > div:nth-child(1){
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .img-computer{
+        width: 200px;
+        height: 200px;
+        
+    }
+
+    section.pharmacy > div.container> div.grid > div:nth-child(2){
+        margin-top: -10px;
     }
 }

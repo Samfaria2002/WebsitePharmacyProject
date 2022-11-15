@@ -99,7 +99,39 @@
         </section><!--Section - Class container-->
     </section><!--Section - Class main-->
 
-    <!--AQUI VAI A SECTION "SOBRE NÓS" QUE O VITAO TA FZD-->
+    <!--Section about us-->
+    <section class="about-us">
+        <div class="container">
+            <div class="grid">
+                <div class="grid-box1">
+                    <div class="title-about-grid">
+                        <p style="color: #7bb7e0">Sobre<span style="color: black"> nós</span></p>
+                    </div>
+                    <div class="about-description">
+                        <p>Somos uma equipe focada em entregar facilidade
+                            e praticidade a todos os nossos usuários, 
+                            entregando suporte completo e em tempo real.
+                            <br>
+                            <br>
+                            Realizamos a conexão dos estoques de remédios 
+                            de farmácias ao nosso aplicativo, entregando uma rápida 
+                            visualização dos produtos aos nossos usuários.
+                            <br>
+                            <br>
+                            Nossos usuários podem realizar reservas de 
+                            remédios que irão comprar, mediante receita médica e com o prazo de 
+                            retirada em farmácias de até 1 dia.
+                        </p>
+                    </div>
+                </div>
+                <div class="grid-box2">
+                    <div class="image-about">
+                        <img src="../../static/images/imgsobre.png">
+                    </div>
+                </div>
+            </div> <!--Div grid-->
+        </div> <!--Div container-->
+    </section> <!--Section Sobre Nós-->
     
     <!--Section "Gestão farmácias"-->
     <section class="pharmacy">
@@ -123,11 +155,11 @@
                         </div>
                         <div class="icons-description">
                             <i class="fa-solid fa-circle-check"></i>
-                            <p>Relatórios mensais de vendas e estoque</p>
+                            <p>Sistema sólido com suporte atvo</p>
                         </div>
                         <div class="icons-description">
                             <i class="fa-solid fa-circle-check"></i>
-                            <p>Asseguramos o registro fiel de todos os pedidos</p>
+                            <p>Registro fiel de todos os pedidos</p>
                         </div>
                         <div class="icons-description">
                             <i class="fa-solid fa-circle-check"></i>
@@ -162,12 +194,16 @@
                     <input type="number" id="cnpj" name="cnpj" required>
                     <label>Detalhe o tipo de serviço a contratar</label>
                     <textarea id="msg" name="msg" rows="4" cols="50"></textarea>
-                    <<input type="submit" value="Solicitar Orçamento">
+                    <button type="submit" value="solicitar" name="enviar" id="solicitar">Solicitar orçamento</button>
                 </form>
             </div>
-        </div>
-    </section>
-    <!--Script menu mobile-->
+            <div class="form-phrase">
+                <p>Tem dúvidas? Acesse nossa <a href="">página de ajuda</a> !</p>
+            </div>
+        </div> <!--Div container-->
+    </section> <!--Section form-section-->
+
+    <!--Script pro menu mobile-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $('nav.nav-mobile h2').click(function(){
