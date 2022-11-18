@@ -26,10 +26,10 @@
 </head>
 <body>
     <section class="main">
-        <header>
+        <header id="header-fix">
             <section class="container">
                 <div class="logo">
-                    <a href="/"><img src="../../static/images/LogoBrancaTrabalhoHD.png"></a>
+                    <a href="home.html"><img src="../../static/images/LogoBrancaTrabalhoHD.png"></a>
                 </div>
                 <nav class="nav-cabecalho">
                     <ul>
@@ -71,7 +71,7 @@
 
         <section class="container">
             <div class="main-description">
-                <p>Veja remédios disponíveis e realize reservas de <p style="color: #c80707;">qualquer lugar e hora</p></p>
+                <p>Veja remédios disponíveis e realize reservas de <span style="color: #c80707;">qualquer lugar e hora</span></p>
             </div>
             <div class="grid-topics">
                 <div>
@@ -93,13 +93,117 @@
             </div><!--Div - Class grid-topics-->
             <div class="bttn-comece">
                 <div id="box-comece">
-                    <a href="">COMEÇE JÁ</a>
+                    <a href="#form-section">COMEÇE JÁ</a>
                 </div>
             </div>
         </section><!--Section - Class container-->
     </section><!--Section - Class main-->
 
-    <!--Script menu mobile-->
+    <!--Section about us-->
+    <section class="about-us">
+        <div class="container">
+            <div class="grid">
+                <div class="grid-box1">
+                    <div class="title-about-grid">
+                        <p style="color: #7bb7e0">Sobre<span style="color: black"> nós</span></p>
+                    </div>
+                    <div class="about-description">
+                        <p>Somos uma equipe focada em entregar facilidade
+                            e praticidade a todos os nossos usuários, 
+                            entregando suporte completo e em tempo real.
+                            <br>
+                            <br>
+                            Realizamos a conexão dos estoques de remédios 
+                            de farmácias ao nosso aplicativo, entregando uma rápida 
+                            visualização dos produtos aos nossos usuários.
+                            <br>
+                            <br>
+                            Nossos usuários podem realizar reservas de 
+                            remédios que irão comprar, mediante receita médica e com o prazo de 
+                            retirada em farmácias de até 1 dia.
+                        </p>
+                    </div>
+                </div>
+                <div class="grid-box2">
+                    <div class="image-about">
+                        <img src="../../static/images/imgsobre.png">
+                    </div>
+                </div>
+            </div> <!--Div grid-->
+        </div> <!--Div container-->
+    </section> <!--Section Sobre Nós-->
+    
+    <!--Section "Gestão farmácias"-->
+    <section class="pharmacy">
+        <div class="container">
+            <div class="grid">
+                <div>
+                    <img class="img-computer" src="../../static/images/icone_comput2.png">
+                </div>
+                <div>
+                    <div class="title-pharmacy">
+                        <p>Também provemos
+                            <p>um <span style="color: #c80707;">sistema de gestão</span></p> 
+                            para as 
+                            <span style="color: #c80707;"> farmácias<span style="color: white;">!</span></span>
+                        </p>
+                    </div>
+                    <div>
+                        <div class="icons-description">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <p>Controle do estoque de maneira virtual</p>
+                        </div>
+                        <div class="icons-description">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <p>Sistema sólido com suporte atvo</p>
+                        </div>
+                        <div class="icons-description">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <p>Registro fiel de todos os pedidos</p>
+                        </div>
+                        <div class="icons-description">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <p>Sistema 100% seguro com suporte ativo</p>
+                        </div>
+                    </div>
+                </div>
+            </div> <!--Div - Class grid-->
+        </div> <!--Div - Class container-->
+    </section> <!--Section - Class pharmacy-->
+
+    <!--Section Diagram-->
+    <section class="diagram">
+        <div>
+            <img src="../../static/images/diagrama_sistema.PNG">
+        </div>
+    </section> <!--Section - Class diagram-->
+
+    <section class="form-section" id="form-section">
+        <div class="container">
+            <div class="form-title">
+                <span>Quer ter sua farmácia integrada a <span style="color: #c80707;">equipe<br> Help Pharm</span>?</span>
+                <p>Realize um orçamento conosco!</p>
+            </div>
+            <div class="form-box">
+                <form method="POST" action="">
+                    <label>Nome do representante</label>
+                    <input type="text" id="nome" name="nome" required>
+                    <label>Email comercial</label>
+                    <input type="text" id="email" name="email" required>
+                    <label>CNPJ do estabelecimento</label>
+                    <input type="number" id="cnpj" name="cnpj" required>
+                    <label>Detalhe o tipo de serviço a contratar</label>
+                    <textarea id="msg" name="msg" rows="4" cols="50"></textarea>
+                    <button type="submit" value="solicitar" name="enviar" id="solicitar">Solicitar orçamento</button>
+                </form>
+            </div>
+            <div class="form-phrase">
+                <p>Tem dúvidas? Acesse nossa <a href="">página de ajuda</a> !</p>
+            </div>
+        </div> <!--Div container-->
+    </section> <!--Section form-section-->
+
+    <!--Script pro menu mobile-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $('nav.nav-mobile h2').click(function(){

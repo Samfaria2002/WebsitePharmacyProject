@@ -2,9 +2,12 @@
 
     * Pedir ajuda pro magician Leo pra usar o sass.
     * To literalmente aqui fazendo um commit as 23hrs :D
+    * Mó doidera a gnt conversando pelo css né :D
 
     azul bonito: #7bb7e0
-    #c80707
+    vermelho legal: #c80707
+    cinza fraco: #d9d9d9
+    cinza forte: #acabab
 */
 
 * {
@@ -36,14 +39,18 @@ html, body{
 /*Header and main section*/
 
 .main{
-    height: 100%;
-    background-image: linear-gradient(#7bb7e0 60%,white 130%);
+    
+    background-image: linear-gradient(180deg, #7BB7E0 30.79%, rgba(123, 183, 224, 0) 136.16%);
 }
 
 /*Header*/
 
 header{
-    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background-color: #7bb7e0;
+    z-index: 999999999;
 }
 
 .container > div{
@@ -79,6 +86,14 @@ nav.nav-cabecalho > ul > li > a{
     text-decoration: none;
 }
 
+nav.nav-cabecalho > ul > li > a:hover{
+    text-decoration: underline;
+}
+
+nav.nav-cabecalho > ul > li > a:active{
+    color: #c80707;
+}
+
 #box-entrar{
     background-color: white;
     border-radius: 15px;
@@ -88,12 +103,20 @@ nav.nav-cabecalho > ul > li > a{
     top: 9px;
 }
 
+nav.nav-cabecalho > ul > li:nth-child(4) > div{
+    cursor: pointer;
+}
+
 nav.nav-cabecalho > ul > li:nth-child(4) > a{
     color: #c80707;
     font-weight: bold;
     position: absolute;
-    top: 16px;
+    top: 15px;
     right: 27px;
+}
+
+nav.nav-cabecalho > ul > li:nth-child(4) > a:hover{
+    text-decoration: none;
 }
 
 /*Menu mobile*/
@@ -131,14 +154,15 @@ nav.nav-mobile a{
 /*Div main-description*/
 
 .main-description{
-    margin-top: 73px;
+    margin-top: 0;
 }
 
 .main-description > p{
+    margin-top: 15vh;
     color: white;
     font-style: normal;
     font-weight: 400;
-    font-size: 50px;
+    font-size: 55px;
     line-height: 80px;
 }
 
@@ -165,7 +189,7 @@ div.grid-topics > div > i{
 div.grid-topics > div > p{
     margin-top: 5px;
     margin-left: 20px;
-    font-size: 18px;
+    font-size: 23px;
     font-weight: 500;
     color: white;
     text-shadow: 2px 2px #7bb7e0;
@@ -175,10 +199,21 @@ div.grid-topics > div > p{
     margin-top: 25px;
     display: flex;
     justify-content: center;
+    z-index: 1;
+}
+
+#box-comece:hover{
+    cursor: pointer;
+    background-color: #d9d9d9;
+}
+
+#box-comece:active{
+    background-color: #acabab;
 }
 
 #box-comece{
     margin-top: 50px;
+    margin-bottom: 40px;
     background-color: white;
     width: 130px;
     height: 33px;
@@ -196,7 +231,312 @@ div.grid-topics > div > p{
     padding-left: 15px;
 }
 
+/*Section Sobre Nós*/
+
+.grid > div:nth-child(1){
+    margin-top: 5vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.title-about-grid{
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.about-description > p{
+    color: black;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 27px;
+}
+
+.image-about > img{
+    margin-left: 15%;
+    width: 470px;
+    height: 330px;
+}
+
+/*Section Gestão Farmácias*/
+
+.pharmacy {
+    background-image: linear-gradient(360deg, #7BB7E0 30.79%, rgba(123, 183, 224, 0) 136.16%);
+    padding-top: 30px;
+}
+
+.grid{
+    display: grid;
+    grid-area: 'a b';
+    grid-template-columns: 50% 50%;
+    padding-bottom: 6%;
+}
+
+.grid > div:nth-child(1) > img{
+    margin-left: 15%;
+    margin-top: 130px;
+}
+
+.img-computer{
+    width: 400px;
+    height: 400px;
+}
+
+.grid > div:nth-child(2) > div.title-pharmacy{
+    color: white;
+    text-align: center;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 45px;
+}
+
+.grid > div:nth-child(2){
+    display: block;
+    margin-top: 40px;
+}
+
+.icons-description{
+    display: flex;
+    margin-left: 60px;
+    margin-top: 70px;
+}
+
+.icons-description > i{
+    color: white;
+    font-size: 20px;
+}
+
+.icons-description > p{
+    color: white;
+    font-size: 23px;
+    text-shadow: 3px 2px #7bb7e0;
+    margin-left: 20px;
+    margin-top: -4px;
+}
+
+/*Section Diagram*/
+
+.diagram{
+    padding: 1% 2%;
+    max-width: 100%;
+}
+
+section.diagram > div{
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+section.diagram > div > img{
+    width: 60%;
+    position: relative;
+}
+
+
+/*Section Form*/
+
+.form-section{
+    background-color: #7bb7e0;
+    padding-top: 30px;
+}
+
+.form-title{
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.form-title > span,p{
+    color: white;
+}
+
+.form-title > span{
+    font-size: 40px;
+}
+
+.form-title > p{
+    margin-top: 30px;
+    font-size: 30px;
+}
+
+.form-box{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.form-box > form{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-box > form > label,input,textarea{
+    width: 50vw;
+}
+
+.form-box > form > label{
+    color: white;
+    margin-top: 35px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: 420;
+}
+
+.form-box > form > input,textarea{
+    padding-left: 10px;
+    background-color: #d9d9d9;
+    border: none;
+    border-radius: 20px;
+    font-size: 17px;
+    outline: none;
+}
+
+.form-box > form > input{
+    height: 40px;
+}
+
+.form-box > form > textarea{
+    width: 50vw;
+    max-width: 50vw;
+}
+
+.form-box > form > button{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 35px;
+    width: 200px;
+    height: 30px;
+    background-color: white !important;
+    border: 0;
+    border-radius: 15px;
+    color: #c80707;
+    font-weight: 600;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.form-box > form > button:hover{
+    background-color: #d9d9d9 !important;
+}
+
+.form-box > form > button:active{
+    background-color: #acabab !important;
+}
+
+.form-phrase{
+    margin-top: 10px;
+    text-align: center;
+}
+
+.form-phrase > p{
+    color: black;
+    font-weight: 500;
+}
+
+.form-phrase > p > a{
+    color: white;
+    text-decoration: none;
+}
+
+.form-phrase > p > a:hover{
+    text-decoration: underline;
+}
+
+.form-phrase > p > a:active{
+    color: #d9d9d9;
+}
+
+/**/
+/**/
+/**/
 /*Responsive*/
+
+@media screen and (max-width: 1300px){
+
+    /*Section Main*/
+    .main-description > p{
+        margin-top: 15vh;
+        text-align: center;
+    }
+
+    /*Section Diagram*/
+
+    section.diagram > div > img{
+        width: 100%;
+        position: relative;
+    }
+}
+
+@media screen and (max-width: 1000px){
+
+    /*Section Sobre Nós*/
+
+    section.about-us > div.container > div.grid{
+        grid-area: 
+        'a'
+        'b';
+        grid-template-columns: 100%;
+        grid-template-rows: 500px 170px;
+    }
+
+    .title-about-grid{
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .about-description{
+        text-align: center;
+    }
+
+    .image-about > img{
+        margin-top: -34vh;
+        transform: translate(10%, 0);
+        width: 470px;
+        height: 300px;
+        display: flex;
+    }
+    
+    /*Section "Gestão Farmácias"*/
+
+    .grid{
+        display: grid;
+        grid-area: 
+        'a'
+        'b';
+        grid-template-columns: 100%;
+        grid-template-rows: 300px 560px;
+        padding-bottom: 0%;
+    }
+
+    .grid > div:nth-child(1){
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .grid > div:nth-child(1) > img{
+       margin: 0;
+    }
+
+    .img-computer{
+        width: 300px;
+        height: 300px;
+    }
+
+    .grid > div:nth-child(2) > div.title-pharmacy{
+        font-size: 40px;
+        text-align: center;
+    }
+
+    .icons-description{
+        justify-content: center;
+        margin-top: 50px;
+    }
+
+    /*Section Diagram*/
+
+    section.diagram > div > img{
+        width: 100%;
+        position: relative;
+    }
+}
 
 @media screen and (max-width: 710px){
     
@@ -229,6 +569,48 @@ div.grid-topics > div > p{
         font-size: 40px;
         line-height: 60px;
     }
+
+    /*Section Sobre Nós*/
+    section.about-us > div.container > div.grid{
+        grid-area: 
+        'a'
+        'b';
+        grid-template-columns: 100%;
+        grid-template-rows: 500px 170px;
+    }
+
+    .title-about-grid{
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .about-description{
+        text-align: center;
+    }
+
+    .image-about > img{
+        margin-top: -34vh;
+        width: 400px;
+        height: 300px;
+        display: flex;
+    }
+
+    /*Section Gestão Farmácias*/
+
+    .grid > div:nth-child(1){
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .grid > div:nth-child(2) > div.title-pharmacy{
+        font-size: 30px;
+    }
+
+    .icons-description > p{
+        font-size: 21px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 
@@ -255,5 +637,58 @@ div.grid-topics > div > p{
 
     .main-description{
         margin-top: 20px;
+    }
+
+    /*Section Sobre Nós*/
+
+    section.about-us > div.container > div.grid{
+        grid-area: 
+        'a'
+        'b';
+        grid-template-columns: 100%;
+        grid-template-rows: 500px 170px;
+    }
+
+    .title-about-grid{
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .about-description{
+        text-align: center;
+    }
+
+    .image-about > img{
+        margin-top: -23vh;
+        width: 350px;
+        height: 250px;
+        display: flex;
+    }
+
+    /*Section "Gestão Farmácias"*/
+
+    .grid > div:nth-child(2) > div.title-pharmacy{
+        font-size: 30px;
+    }
+
+    .icons-description > p{
+        font-size: 19px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .grid > div:nth-child(1){
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .img-computer{
+        width: 200px;
+        height: 200px;
+        
+    }
+
+    section.pharmacy > div.container> div.grid > div:nth-child(2){
+        margin-top: -10px;
     }
 }
