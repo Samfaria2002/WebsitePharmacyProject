@@ -7,7 +7,7 @@ class User(db.Model):
   userId = db.Column(db.Integer, primary_key=True, autoincrement=True)
   userName = db.Column(db.String(99))
   password = db.Column(db.String(99))
-  userType = db.Column(db.String(1))
+  userType = db.Column(db.String(1)) # v ou c
   name = db.Column(db.String(100))
   birthDate = db.Column(db.Date)
   sex = db.Column(db.String(1))
@@ -33,7 +33,7 @@ class Pharmacy(db.Model):
   cidade = db.Column(db.String(100))
   bairro = db.Column(db.String(100))
   rua = db.Column(db.String(100))
-  #numero_endereco = db.Column(db.String(6))
+  complemento = db.Column(db.String(200))
   cep = db.Column(db.String(9)) # 8 digitos + 1 '-'
   latitude = db.Column(db.Numeric(13,10)) # vai ser 18,15 dps >:D
   longitude = db.Column(db.Numeric(13,10))
