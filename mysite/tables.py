@@ -41,7 +41,6 @@ class Pharmacy(db.Model):
   #users = db.relationship('user', backref='person', lazy=True)
   #remedys = db.relationship('remedy', backref='person', lazy=True)
 
-
 class PharmacySchema(ma.SQLAlchemyAutoSchema):
   
   latitude = fields.Decimal(as_string=True)
