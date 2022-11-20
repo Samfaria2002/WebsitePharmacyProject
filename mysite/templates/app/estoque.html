@@ -20,8 +20,7 @@
         <td data-id="001" class="name-item">Bla</td>
         <td>827</td>
         <td>08/22</td>
-        <td><button data-id="001" class="edit-item"><img src="{{url_for('static', filename='images/pencil-alt.svg')}}"
-              alt="Edit"></button></td>
+        <td><button data-id="001" class="edit-item"><img src="{{url_for('static', filename='images/pencil-alt.svg')}}" alt="Edit"></button></td>
       </tr>
       <tr>
         <td>002</td>
@@ -58,4 +57,24 @@
     </tbody>
   </table>
 </div>
+
+<script>
+  // pegar dados aqui e dps mandar pra tabela
+  /*
+  for(el of data) {
+    
+
+    let str = `
+      <tr>
+        <td>${el.id}</td>
+        <td data-id="${el.id}" class="name-item">${el.name}</td>
+        <td>${el.laboratory}</td>
+        <td>${el.quantity}</td>
+        <td>${el.price}</td>
+        <td><button data-id="001" class="edit-item"><img src="{{url_for('static', filename='images/pencil-alt.svg')}}" alt="Edit"></button></td>
+      </tr>
+    `
+  }
+  */
+</script>
 {% endblock %}

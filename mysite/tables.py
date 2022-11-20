@@ -1,13 +1,15 @@
 from extensions import db, ma
 from marshmallow import fields
+from flask_login import UserMixin
 
-class User(db.Model):
+
+class User(UserMixin, db.Model):
   __tablename__ = "user"
 
   userId = db.Column(db.Integer, primary_key=True, autoincrement=True)
   userName = db.Column(db.String(99))
   password = db.Column(db.String(99))
-  userType = db.Column(db.String(1)) # v ou c
+  userType = db.Column(db.String(1)) # f ou c
   name = db.Column(db.String(100))
   birthDate = db.Column(db.Date)
   sex = db.Column(db.String(1))
@@ -15,6 +17,9 @@ class User(db.Model):
   pharmacyId = db.Column(db.Integer, db.ForeignKey('pharmacy.pharmacyId'),nullable=True)
   #orders = db.relationship('order', backref='person', lazy=True)
   #recipes = db.relationship('recipe', backref='person', lazy=True)
+
+  def get_id(self):
+    return (self.userId)
 
 class UserSchema(ma.SQLAlchemyAutoSchema):
   
@@ -50,6 +55,7 @@ class PharmacySchema(ma.SQLAlchemyAutoSchema):
 
 # Init schema
 #pharmacy_schema = PharmacySchema()
+'''
 class Inventary(db.Model):
   __tablename__ = "inventary"
 
@@ -62,6 +68,7 @@ class InventarySchema(ma.SQLAlchemyAutoSchema):
   quantity = fields.Decimal(as_string=True)
   class Meta:
     model = Inventary
+'''
 
 class Remedy(db.Model):
   __tablename__ = "remedy"
@@ -72,11 +79,14 @@ class Remedy(db.Model):
   price = db.Column(db.Numeric(10,2))
   barCode = db.Column(db.String(100))
   pharmacyId = db.Column(db.Integer, db.ForeignKey('pharmacy.pharmacyId'),nullable=False)
-  inventaryId = db.Column(db.Integer, db.ForeignKey('inventary.inventaryId'),nullable=False)
+  #inventaryId = db.Column(db.Integer, db.ForeignKey('inventary.inventaryId'),nullable=False)
+  unitType = db.Column(db.String(1)) # q ou p
+  quantity = db.Column(db.Numeric(20,10))
   #inventary = db.relationship('inventary', backref='person', uselist=False, lazy=True)
 
 class RemedySchema(ma.SQLAlchemyAutoSchema):
   price = fields.Decimal(as_string=True)
+  quantity = fields.Decimal(as_string=True)
   class Meta:
     model = Remedy
 
@@ -115,6 +125,7 @@ class Order(db.Model):
   orderId = db.Column(db.Integer, primary_key=True, autoincrement=True)
   date = db.Column(db.Date)
   orderType = db.Column(db.String(1))
+  status = db.Column(db.String(1))
   totalValue = db.Column(db.Numeric(20,10))
   pharmacyId = db.Column(db.Integer, db.ForeignKey('pharmacy.pharmacyId'),nullable=False)
   recipeId = db.Column(db.Integer, db.ForeignKey('recipe.recipeId'),nullable=True)
@@ -146,7 +157,7 @@ class OrderItemSchema(ma.SQLAlchemyAutoSchema):
 
 pharmacies_schema = PharmacySchema(many=True)
 users_schema = UserSchema(many=True)
-inventaries_schema = InventarySchema(many=True)
+#inventaries_schema = InventarySchema(many=True)
 remedies_schema = RemedySchema(many=True)
 recipe_schema = RecipeSchema(many=True)
 recipeItem_schema = RecipeItemSchema(many=True)

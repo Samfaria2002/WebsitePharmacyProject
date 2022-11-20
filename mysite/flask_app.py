@@ -3,7 +3,7 @@ from flask_assets import Environment, Bundle
 import os
 from dotenv import load_dotenv
 from routes import routes
-from extensions import db, migrate, ma
+from extensions import db, migrate, ma, login_manager
 
 app = Flask(__name__)
 
@@ -20,10 +20,15 @@ SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostnam
 app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
 app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config['SECRET_KEY'] = 'secret-key-goes-here'
 
 db.init_app(app)
 migrate.init_app(app)
 ma.init_app(app)
+login_manager.init_app(app)
+login_manager.login_view = '/login' 
+login_manager.login_message = 'Realize o Login para visualizar a página'
+
 assets = Environment(app)
 #assets.url = app.static_url_path
 # static/stylesheet/

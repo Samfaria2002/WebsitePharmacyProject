@@ -1,17 +1,21 @@
 {% extends '/components/forms-base.html' %}
 {% block title %}<title>Realize seu cadastro</title>{% endblock %}
 {% block content %}
-<div class="form">
+<form class="form">
   <div class="row logo-container">
     <h1>Logo aqui</h1>
   </div>
   <div class="row">
-    <label for="login" class="form-label">Email</label>
-    <input type="text" name="login" id="login" class="form-input" placeholder="Insira seu Email">
+    <label for="email" class="form-label">Email</label>
+    <input type="text" name="email" id="email" class="form-input" placeholder="Insira seu Email">
   </div>
   <div class="row">
     <label for="name" class="form-label">Nome completo</label>
     <input type="text" name="name" id="name" class="form-input" placeholder="Insira seu Nome completo">
+  </div>
+  <div class="row">
+    <label for="username" class="form-label">Nome de Usuário</label>
+    <input type="text" name="username" id="username" class="form-input" placeholder="Insira um Nome de usuário">
   </div>
   <div class="row">
     <label for="data-nascimento" class="form-label">Data de nascimento</label>
@@ -19,7 +23,7 @@
   </div>
   <div class="row">
     <label for="name" class="form-label">Insira seu sexo</label>
-    <select name="sexo" id="sexo" class="form-input">
+    <select name="sex" id="sex" class="form-input">
       <option value="masculino">Masculino</option>
       <option value="feminino">Feminino</option>
     </select>
@@ -29,11 +33,37 @@
     <input type="text" name="password" id="password" class="form-input" placeholder="Insira sua Senha">
   </div>
   <div class="row">
-    <label for="password" class="form-label">Confirmar senha</label>
-    <input type="text" name="password" id="password" class="form-input" placeholder="Confirme sua Senha">
+    <label for="password-confirm" class="form-label">Confirmar senha</label>
+    <input type="text" name="password-confirm" id="password-confirm" class="form-input" placeholder="Confirme sua Senha">
   </div>
   <div class="row">
     <button id="submit">Realizar Cadastro</button>
   </div>
-</div>
+</form>
+<script>
+  document.querySelector('#submit').addEventListener('click', (e) => {
+    e.preventDefault()
+
+    let data = {}
+    let formData = new FormData(document.querySelector('form'))
+    formData.forEach((value, key) => (data[key] = value))
+
+    console.log(data)
+
+    data.userType = 'F'
+    data.pharmacyId = 1
+
+    fetch('/cadastro', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    }).then(resp => resp.json())
+    .then(resp => {
+      alert(resp)
+    })
+
+  })
+</script>
 {% endblock %}
