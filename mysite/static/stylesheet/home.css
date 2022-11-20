@@ -39,7 +39,7 @@ html, body{
 /*Header and main section*/
 
 .main{
-    
+    height: 100vh;
     background-image: linear-gradient(180deg, #7BB7E0 30.79%, rgba(123, 183, 224, 0) 136.16%);
 }
 
@@ -154,7 +154,7 @@ nav.nav-mobile a{
 /*Div main-description*/
 
 .main-description{
-    margin-top: 0;
+    margin-top: 8vh;
 }
 
 .main-description > p{
@@ -162,12 +162,12 @@ nav.nav-mobile a{
     color: white;
     font-style: normal;
     font-weight: 400;
-    font-size: 55px;
+    font-size: 59px;
     line-height: 80px;
 }
 
 div.grid-topics{
-    margin-top: 70px;
+    margin-top: 10vh;
     display: grid;
     grid-area: 
     'a b'
@@ -182,21 +182,21 @@ div.grid-topics > div{
 }
 
 div.grid-topics > div > i{
-    font-size: 27px;
+    font-size: 33px;
     color: white;
 }
 
 div.grid-topics > div > p{
     margin-top: 5px;
     margin-left: 20px;
-    font-size: 23px;
+    font-size: 25px;
     font-weight: 500;
     color: white;
     text-shadow: 2px 2px #7bb7e0;
 }
 
 .bttn-comece{
-    margin-top: 25px;
+    margin-top: 4vh;
     display: flex;
     justify-content: center;
     z-index: 1;
@@ -423,6 +423,7 @@ section.diagram > div > img{
 
 .form-phrase{
     margin-top: 10px;
+    padding-bottom: 40px;
     text-align: center;
 }
 
@@ -446,69 +447,41 @@ section.diagram > div > img{
 
 /* Footer */
 
-.section-footer {
-    width: 100%;
-    background: linear-gradient(360deg, rgba(123, 183, 224, 0) -17.42%, #7BB7E0 70.83%);
-    display: flex;
-    font-size: 15;
-    color: #ffffff;
+footer.footer1{
+    background: #52ccc3;
+    height: 180px;
+    padding: 20px 0;
+    color: white;
 }
 
-.img {
-    width: 100px;
-    height: 70px;
-    display: flex;
-    justify-content: space-around;
+footer.footer1 a{
+    display: block;
+    color: white;
 }
 
-.direitosreservados {
-    display: flow-root;
-    font-size: 12;
-    justify-content: space-evenly;
+footer.footer1 p{
+    margin-top: 8px;
+    font-weight: lighter;
+}
+
+footer.footer1 h2{
+    font-weight: normal;
+    font-size: 23px;
+}
+
+div.group-icons a{
+    font-size: 18px;
+    display: inline-block;
+    margin: 15px 10px;
+}
+
+footer.footer2{
+    padding: 15px 0;
+    background: #409891;
     text-align: center;
+    color: white;
 }
 
-.textoFooter {
-    margin-top: -20px;
-    font-size: 12;
-    line-height: 60px;
-    display: flex;
-    justify-content: space-evenly;
-    text-align: center;
-}
-
-.textoduvidas {
-    font-size: 12;
-    margin-top: -15px;
-    display: flex;
-    justify-content: space-evenly;
-    text-align: center;
-}
-
-.button-div {
-    padding-top: 10px;
-    display: flex;
-    justify-content: center;
-    font-size: 17px;
-}
-
-.button-footer-box{
-    background-color: white;
-    border-radius: 10px;
-    width: 150px;
-    height: 30px;
-}
-
-.button-footer-box > a{
-    color: #c80707;
-    
-}
-
-input::placeholder {
-    border: none;
-    background-color: #FFFFFF;
-    color: #7BB7E0;
-}
 
 /**/
 /**/
@@ -553,8 +526,8 @@ input::placeholder {
     }
 
     .image-about > img{
-        margin-top: -34vh;
-        transform: translate(10%, 0);
+        margin-top: -21vh;
+        margin-left: 15vw;
         width: 470px;
         height: 300px;
         display: flex;
@@ -655,9 +628,10 @@ input::placeholder {
     }
 
     .image-about > img{
-        margin-top: -34vh;
+        margin-top: -16vh;
+        margin-left: 15vw;
         width: 400px;
-        height: 300px;
+        height: 270px;
         display: flex;
     }
 
@@ -676,6 +650,12 @@ input::placeholder {
         font-size: 21px;
         margin-left: auto;
         margin-right: auto;
+    }
+
+    /*Footer*/
+
+    footer.footer1{
+        text-align: center;
     }
 }
 
@@ -725,9 +705,10 @@ input::placeholder {
     }
 
     .image-about > img{
-        margin-top: -23vh;
-        width: 350px;
-        height: 250px;
+        margin-top: -12vh;
+        margin-left: 15vw;
+        width: 300px;
+        height: 230px;
         display: flex;
     }
 
