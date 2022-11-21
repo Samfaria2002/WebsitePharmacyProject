@@ -30,9 +30,19 @@ html, body{
     padding: 0 2%;
 }
 
-.clear{clear: both;}
+.w50{
+    width: 50%;
+    float: left;
+}
+
+.w33{
+    float: left;
+    width: 33.3%;
+}
 
 .center{text-align: center;}
+
+.clear{clear: both;}
 
 /*Page Style init*/
 
@@ -447,8 +457,60 @@ section.diagram > div > img{
 
 /* Footer */
 
+footer.footer0{
+    background: #427aa0;
+    height: 180px;
+    padding: 20px 0;
+    padding-bottom: 220px;
+    color: white;
+    display: flex;
+    text-align: center;
+}
+
+footer.footer0 h2{
+    font-weight: normal;
+    font-size: 23px;
+}
+
+footer.footer0 img{
+    padding-top: 10px;
+    width: 130px;
+    height: 130px;
+}
+
+footer.footer0 form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+}
+
+footer.footer0 form > input, textarea{
+    background: #d9d9d9;
+    width: 50%;
+    margin-top: 5px;
+    padding-left: 5px;
+    font-size: 15px;
+    border: 0;
+    border-radius: 10px;
+    outline: none;
+}
+
+footer.footer0 form > button{
+    margin-top: 10px;
+    width: 90px;
+    height: 20px;
+    border: 0;
+    border-radius: 10px;
+    background: white;
+    cursor: pointer;
+    color: #c80707;
+    font-weight: 600;
+    font-size: 15px;
+}
+
 footer.footer1{
-    background: #52ccc3;
+    background: #427aa0;
     height: 180px;
     padding: 20px 0;
     color: white;
@@ -456,7 +518,16 @@ footer.footer1{
 
 footer.footer1 a{
     display: block;
+    text-decoration: none;
     color: white;
+}
+
+footer.footer1 a:hover{
+    text-decoration: underline;
+}
+
+footer.footer1 a:active{
+    color: #c80707;
 }
 
 footer.footer1 p{
@@ -477,9 +548,13 @@ div.group-icons a{
 
 footer.footer2{
     padding: 15px 0;
-    background: #409891;
+    background: #346283;
     text-align: center;
     color: white;
+}
+
+footer.footer2 p{
+    margin-bottom: 5px;
 }
 
 
@@ -489,6 +564,11 @@ footer.footer2{
 /*Responsive*/
 
 @media screen and (max-width: 1300px){
+
+    .main{
+        height: 100vh;
+        background-image: linear-gradient(180deg, #7BB7E0 30.79%, rgba(123, 183, 224, 0) 136.16%);
+    }
 
     /*Section Main*/
     .main-description > p{
@@ -505,6 +585,11 @@ footer.footer2{
 }
 
 @media screen and (max-width: 1000px){
+
+    .main{
+        height: 130vh;
+        background-image: linear-gradient(180deg, #7BB7E0 30.79%, rgba(123, 183, 224, 0) 136.16%);
+    }
 
     /*Section Sobre Nós*/
 
@@ -526,7 +611,7 @@ footer.footer2{
     }
 
     .image-about > img{
-        margin-top: -21vh;
+        margin-top: -28vh;
         margin-left: 15vw;
         width: 470px;
         height: 300px;
@@ -579,6 +664,11 @@ footer.footer2{
 
 @media screen and (max-width: 710px){
     
+    .main{
+        height: 115vh;
+        background-image: linear-gradient(180deg, #7BB7E0 30.79%, rgba(123, 183, 224, 0) 136.16%);
+    }
+
     .logo > a > img{
         width: 190px;
         height: 47px;
@@ -628,7 +718,7 @@ footer.footer2{
     }
 
     .image-about > img{
-        margin-top: -16vh;
+        margin-top: -21vh;
         margin-left: 15vw;
         width: 400px;
         height: 270px;
@@ -661,6 +751,11 @@ footer.footer2{
 
 
 @media screen and (max-width: 550px){
+    .main{
+        height: 130vh;
+        background-image: linear-gradient(180deg, #7BB7E0 30.79%, rgba(123, 183, 224, 0) 136.16%);
+    }
+
     .logo > a > img{
         width: 190px;
         height: 47px;
@@ -705,7 +800,7 @@ footer.footer2{
     }
 
     .image-about > img{
-        margin-top: -12vh;
+        margin-top: -18vh;
         margin-left: 15vw;
         width: 300px;
         height: 230px;
@@ -737,5 +832,52 @@ footer.footer2{
 
     section.pharmacy > div.container> div.grid > div:nth-child(2){
         margin-top: -10px;
+    }
+
+    /*Footer 0*/
+
+    footer.footer0{
+        padding-bottom: 250px;
+    }
+}
+
+@media screen and (max-width: 420px){
+
+    .main{
+        height: 110vh;
+        background-image: linear-gradient(180deg, #7BB7E0 30.79%, rgba(123, 183, 224, 0) 136.16%);
+    }
+
+    /*Section Sobre Nós*/
+
+    .image-about > img{
+        margin-top: -5vh;
+        margin-left: 18vw;
+        width: 230px;
+        height: 160px;
+        display: flex;
+    }
+
+    section.pharmacy{
+        height: 90vh;
+    }
+
+    /*Footer 0*/
+
+    footer.footer0{
+        padding-bottom: 300px;
+    }
+}
+
+@media screen and (max-width: 380px){
+
+    .main{
+        height: 149vh;
+        background-image: linear-gradient(180deg, #7BB7E0 30.79%, rgba(123, 183, 224, 0) 136.16%);
+    }
+
+    /*Footer 1*/
+    footer.footer1{
+        padding-bottom: 200px;
     }
 }
