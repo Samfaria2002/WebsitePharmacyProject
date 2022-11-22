@@ -16,8 +16,13 @@
   <script src="https://code.jquery.com/jquery-3.6.1.min.js"
     integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
+<!--
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+-->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.css">
+
+  <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.js"></script>
 
 {% endblock %}
 
@@ -31,12 +36,10 @@
         <h1 id="modal-title">Welcome</h1>
         <div id="modal-content">
           <form class="form" method="" action="">
-            <!--
             <div class="row hidden">
               <label for="id" class="form-label">ID do Item</label>
               <input type="text" name="id" id="id" class="form-input" placeholder="Exemplo: 001" disabled>
             </div>
-            -->
             <div class="row">
               <label for="name" class="form-label">Nome do Item</label>
               <input type="text" name="name" id="name" class="form-input" placeholder="Exemplo: Dipirona">
@@ -141,27 +144,27 @@
 
 
 
-  document.querySelectorAll('.edit-item').forEach((el, i) => {
-    el.addEventListener('click', () => {
-      modal.classList.add("modal-visible")
+  function editItem(itemId) {
+    modal.classList.add("modal-visible")
+    document.querySelector('#modal-title').innerHTML = 'Alterar Item'
+    document.querySelector('#modal-complete').innerHTML = 'Alterar'
+    document.querySelector('#modal-complete').setAttribute('method', 'edit')
 
-      document.querySelector('#modal-title').innerHTML = 'Alterar Item'
-      document.querySelector('#modal-complete').innerHTML = 'Alterar'
-      document.querySelector('#modal-complete').setAttribute('method', 'edit')
+    document.querySelector('#id').value = itemId
 
-      document.querySelector('#id-item').value = el.getAttribute('data-id')
+    // considerar possível refatoramento dps :D
+    document.querySelector('#name').value = document.querySelector(`.name-item[data-id="${itemId}"]`).innerText
+    document.querySelector('#laboratory').value = document.querySelector(`.laboratory-item[data-id="${itemId}"]`).innerText
+    document.querySelector('#price').value = document.querySelector(`.price-item[data-id="${itemId}"]`).innerText
+    document.querySelector('#quantity').value = document.querySelector(`.qtd-item[data-id="${itemId}"]`).innerText
+    document.querySelector('#name').setAttribute('disabled', true)
 
-      // considerar possível refatoramento dps :D
-      document.querySelector('#nome-item').value = document.querySelector(`.name-item[data-id="${el.getAttribute('data-id')}"]`).innerText
-      document.querySelector('#nome-item').setAttribute('disabled', true)
+    document.querySelector('#delete-item').style.display = 'block'
 
-      document.querySelector('#delete-item').style.display = 'block'
+    document.querySelector('#modal-content form').setAttribute('method', 'POST')
+    document.querySelector('#modal-content form').setAttribute('action', '/api/edit-item')
+  }
 
-      document.querySelector('#modal-content form').setAttribute('method', 'POST')
-      document.querySelector('#modal-content form').setAttribute('action', '/api/edit-item')
-
-    })
-  })
 
   document.querySelector('#modal').addEventListener('click', (e) => {
     if (e.target.id === 'modal') modal.classList.remove("modal-visible")
@@ -181,7 +184,6 @@
     let formData = new FormData(document.querySelector('#modal-content form'))
     formData.forEach((value, key) => (data[key] = value))
     data.unitType = 'q'
-    data.pharmacyId = 1
     console.log(data)
 
     switch(method) {
@@ -200,24 +202,43 @@
           modal.classList.remove("modal-visible");
         })
       break;
+      case 'edit':
+      document.querySelector('#modal-complete').innerHTML = 'Alterando...'
+
+        let id = document.querySelector('#id').value
+        fetch(`/api/remedy/${id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        }).then(resp => resp.json())
+        .then(resp => {
+          alert(resp)
+          modal.classList.remove("modal-visible");
+        })
+      break;
     }
 
   })
 
-
-  </script>
-
-  <script>
-  $(document).ready(function () {
-    $('#table_id').DataTable({
-      language: {
-        url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+  document.querySelector('#delete-btn').addEventListener('click', (e) => {
+    e.preventDefault()
+    let id = document.querySelector('#id').value
+    fetch(`/api/remedy/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
       },
-    })
+      }).then(resp => resp.json())
+      .then(resp => {
+        alert(resp)
+        modal.classList.remove("modal-visible");
+      })
   })
+
+
   </script>
-
-
   <script>
     ;(() => {
       let page = window.location.pathname
