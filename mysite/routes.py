@@ -50,7 +50,7 @@ def cadastro():
             return jsonify('Insira uma senha com no minimo 4 caracteres')
 
         if body['password'] != body['password-confirm']:
-            return jsonify('a senha esta diferente da senha confirmada')
+            return jsonify('as senhas precisam ser iguais')
         
 
         body['sex'] = body['sex'][0]
@@ -61,8 +61,8 @@ def cadastro():
         if findUser:
             return jsonify('usuário já existe'), 400
 
-        userPharm = session.get('pharmacyId', False)
-        if userPharm == False: userPharm = body['pharmacyId']
+        userPharm = session.get('pharmacyId', None)
+        if userPharm == None and not body['pharmacyId']: userPharm = body['pharmacyId']
 
         newUser = User(userName=body['username'], password=body['password'], userType=body['userType'], name=body['name'], birthDate=body['data-nascimento'], sex=body['sex'], 
         email=body['email'], pharmacyId=userPharm)
@@ -80,11 +80,17 @@ def login():
     if request.method == 'GET':
         return render_template('/app/login.html')
     else :
-        isMobile = True if request.args.get('ismobile') == 'true' else False
+        if request.args.get('ismobile') == 'true':
+            isMobile = True
+            tipoDeUser = 'C'
+        else:
+            isMobile = False
+            tipoDeUser = 'F'
+        
         username = request.form.get('username')
         password = request.form.get('password')
 
-        user = User.query.filter_by(userName=username, userType='F').first()
+        user = User.query.filter_by(userName=username, userType=tipoDeUser).first()
 
         if not user or not user.password == password:
             strErr = 'Revise suas credenciais e tente novamente'

@@ -15,9 +15,11 @@
     * fazer tabelas aparecerem/desaparecerem de forma "graciosa" -- feito?
     * talvez margin-top no mobile (5vh)
     * ver forma de user current_user pra pegar o pharmacyId do user -- session resolveu :D
-    * p/ dps: salvar hash da senha no banco; pegar no minimo 8 caracteres (c/ caractere especial e número)
-    * criar CRUD de pedidos e implementar req no front
+    * criar CRUD de pedidos e implementar req no front -- quase ok
     * separar req de API p/ outra file
+    * aceitar pharm null no cadastro -- ok?
+    * login no mobile funcional -- ok?
+    * "notification is-danger"/flash reject login --> botar de vermelhinho :D
     
 
     *** LONGO PRAZO ***
