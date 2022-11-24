@@ -9,7 +9,7 @@ class User(UserMixin, db.Model):
   userId = db.Column(db.Integer, primary_key=True, autoincrement=True)
   userName = db.Column(db.String(99))
   password = db.Column(db.String(99))
-  userType = db.Column(db.String(1)) # f ou c
+  userType = db.Column(db.String(1)) # f ou c ou a
   name = db.Column(db.String(100))
   birthDate = db.Column(db.Date)
   sex = db.Column(db.String(1))
@@ -124,8 +124,8 @@ class Order(db.Model):
 
   orderId = db.Column(db.Integer, primary_key=True, autoincrement=True)
   date = db.Column(db.Date)
-  orderType = db.Column(db.String(1))
-  status = db.Column(db.String(1))
+  orderType = db.Column(db.String(1)) # V de venda, E de estoque
+  status = db.Column(db.String(1)) # C de created D de cabo
   totalValue = db.Column(db.Numeric(20,10))
   pharmacyId = db.Column(db.Integer, db.ForeignKey('pharmacy.pharmacyId'),nullable=False)
   recipeId = db.Column(db.Integer, db.ForeignKey('recipe.recipeId'),nullable=True)
@@ -143,7 +143,7 @@ class OrderItem(db.Model):
   orderItemId = db.Column(db.Integer, primary_key=True, autoincrement=True)
   quantity = db.Column(db.Numeric(20,10))
   orderId = db.Column(db.Integer, db.ForeignKey('order.orderId'),nullable=False)
-  recipeItemId = db.Column(db.Integer, db.ForeignKey('recipeItem.recipeItemId'),nullable=False)
+  recipeItemId = db.Column(db.Integer, db.ForeignKey('recipeItem.recipeItemId'),nullable=True)
   remedyId = db.Column(db.Integer, db.ForeignKey('remedy.remedyId'),nullable=False)
 
 
@@ -151,6 +151,16 @@ class OrderItemSchema(ma.SQLAlchemyAutoSchema):
   quantity = fields.Decimal(as_string=True)
   class Meta:
     model = OrderItem
+
+
+class PedidoSchema(ma.SQLAlchemySchema): 
+  quantity = fields.Decimal(as_string=True)
+  totalValue = fields.Decimal(as_string=True)
+  price = fields.Decimal(as_string=True)
+  date = fields.Date()
+  class Meta:
+    fields = ('orderId','date','orderType','status','totalValue','pharmacyId','userId', 'quantity', 'remedyId', 'name', 'unitType', 'price', 'laboratory')
+
 
 
 # pro futuro: tentar fazer as relationship funcionarem
@@ -161,5 +171,7 @@ users_schema = UserSchema(many=True)
 remedies_schema = RemedySchema(many=True)
 recipe_schema = RecipeSchema(many=True)
 recipeItem_schema = RecipeItemSchema(many=True)
-order_schema = OrderSchema(many=True)
+orders_schema = OrderSchema(many=True)
 orderItem_schema = OrderItemSchema(many=True)
+
+pedidos_schema = PedidoSchema(many=True)

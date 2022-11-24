@@ -2,16 +2,25 @@
     * possível refatoramento/abstração da base e do index/solicitacoes --> base c/ sidebar + content --> extend p/ --> base + logo c/ table que será usado p/ index e solicitacoes --ok
     * criar dashboard de admin p/ visualização de user/req, etc -- como fazer isso?
     * definir quais campos serão necessários para as tabelas do backend -- ok
-    * construir todo o banco de dados e criar os métodos via sqlAlchemy
-        -- templates de banco feita -- só do Pharmacy até então
-        -- definir arquivo separado p/ templates de tables
+    * construir todo o banco de dados e criar os métodos via sqlAlchemy -- ok
+        -- templates de banco feita -- ok
+        -- definir arquivo separado p/ templates de tables -- ok
     * setar .env p/ esconder informações sigilosas >:D -- ok
-    * botar a index do Little Samuca p/ rodar (em cima da rota '/')
-    * preparar o mobile via react-native
+    * botar a index do Little Samuca p/ rodar (em cima da rota '/') -- ok
+    * preparar o mobile via react-native -- c/ Little Samuca + Gualbas
     * mudar aquele btn de delete do modal depois
     * preparar pull request pro pythonanywhere -- mais ou menos feito
     * utilização de scss p/ facilidade de utilização de styles -- ok
     * definir .aciive na pag selecionada -- ok
-    * fazer tabelas aparecerem/desaparecerem de forma "graciosa"
+    * fazer tabelas aparecerem/desaparecerem de forma "graciosa" -- feito?
     * talvez margin-top no mobile (5vh)
-    * ver forma de user current_user pra pegar o pharmacyId do user
+    * ver forma de user current_user pra pegar o pharmacyId do user -- session resolveu :D
+    * p/ dps: salvar hash da senha no banco; pegar no minimo 8 caracteres (c/ caractere especial e número)
+    * criar CRUD de pedidos e implementar req no front
+    * separar req de API p/ outra file
+    
+
+    *** LONGO PRAZO ***
+    
+    salvar hash da senha no banco; pegar no minimo 8 caracteres (c/ caractere especial e número) 
+    criar autenticação p/ certas requisições da API

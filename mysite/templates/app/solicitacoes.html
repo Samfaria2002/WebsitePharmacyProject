@@ -8,54 +8,57 @@
 <div class="table-container">
   <table id="table_id" class="display">
     <thead>
+      <th>ID</th>
       <th>Data</th>
-      <th>Horario</th>
-      <th>Medicamento</th>
-      <th>Solicitante</th>
-      <th>Receita</th>
+      <th>Tipo</th>
+      <th>Status</th>
+      <th>Custo Total</th>
+      <th>Remédio</th>
+      <th>Qtd</th>
+      <th></th>
     </thead>
     <tbody>
-      <tr>
-        <td>10/09/2022</td>
-        <td>13:40</td>
-        <td>Dipirona</td>
-        <td>Samuel</td>
-        <td><button class="edit-item"><img src="{{url_for('static', filename='images/paperclip.svg')}}"
-          alt="Edit"></button></td>
-      </tr>
-      <tr>
-        <td>10/09/2022</td>
-        <td>15:40</td>
-        <td>Paracetamol</td>
-        <td>Gualberto</td>
-        <td><button class="edit-item"><img src="{{url_for('static', filename='images/paperclip.svg')}}"
-          alt="Edit"></button></td>
-      </tr>
-      <tr>
-        <td>10/09/2022</td>
-        <td>17:18</td>
-        <td>Lol</td>
-        <td>Thiago</td>
-        <td><button class="edit-item"><img src="{{url_for('static', filename='images/paperclip.svg')}}"
-          alt="Edit"></button></td>
-      </tr>
-      <tr>
-        <td>10/09/2022</td>
-        <td>16:20</td>
-        <td>Fenofitalina</td>
-        <td>Vitor</td>
-        <td><button class="edit-item"><img src="{{url_for('static', filename='images/paperclip.svg')}}"
-          alt="Edit"></button></td>
-      </tr>
-      <tr>
-        <td>10/09/2022</td>
-        <td>12:40</td>
-        <td>Codeina</td>
-        <td>Leonardo</td>
-        <td><button class="edit-item"><img src="{{url_for('static', filename='images/paperclip.svg')}}"
-          alt="Edit"></button></td>
-      </tr>
     </tbody>
   </table>
 </div>
+
+<script>
+
+  const formatCurrency = Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' })
+
+  fetch('/api/order', {
+    method: 'GET'
+  })
+  .then(resp => resp.json())
+  .then(resp => {
+    console.log(resp)
+    for(let el of resp) {
+
+      // <td data-id="${el.orderId}" class="price-item">${el.price}</td>
+
+      const qtd = el.unitType.toLowerCase() === 'q' ? Number(el.quantity).toFixed(0) : Number(el.quantity).toFixed(2)
+      const total = formatCurrency.format(el.totalValue)
+      let tr = document.createElement('tr')
+      let str = `
+        <td>${el.orderId}</td>
+        <td data-id="${el.date}" class="date-order">${el.date}</td>
+        <td data-id="${el.orderId}" class="type-order">${el.orderType}</td>
+        <td data-id="${el.orderId}" class="status-order">${el.status}</td>
+        <td data-id="${el.orderId}" class="total-order">${total}</td>
+        <td data-id="${el.orderId}" class="remedy-name">${el.name}</td>
+        <td data-id="${el.orderId}" class="qtd-item">${qtd}</td>
+        <td><button data-id="${el.orderId}" class="edit-item" onclick="editItem(${el.orderId})"><img src="{{url_for('static', filename='images/pencil-alt.svg')}}" alt="Edit"></button></td>
+      `
+      tr.innerHTML = str
+      document.querySelector('#table_id tbody').appendChild(tr)
+    }
+
+    $('#table_id').DataTable({
+        language: {
+          url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+        },
+        responsive: true
+    })
+  })
+</script>
 {% endblock %}

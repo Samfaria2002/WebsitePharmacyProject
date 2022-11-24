@@ -2,8 +2,11 @@
 {% block title %}<title>Dashboard</title>{% endblock %}
 {% block content %}
 <div class="company-info">
+  <!--
   <h1>Logo + </h1>
   <h1 style="margin-left: 10px;">Nome da empresa</h1>
+  -->
+  <h1>Ola {{ name }}</h1>
 </div>
 <div class="table-container">
   <table id="table_id" class="display">
@@ -31,7 +34,7 @@
     console.log(resp)
     for(let el of resp) {
 
-      let qtd = el.unitType.toLowerCase() === 'q' ? Number(el.quantity).toFixed(0) : Number(el.quantity).toFixed(2)
+      const qtd = el.unitType.toLowerCase() === 'q' ? Number(el.quantity).toFixed(0) : Number(el.quantity).toFixed(2)
       let tr = document.createElement('tr')
       let str = `
         <td>${el.remedyId}</td>
