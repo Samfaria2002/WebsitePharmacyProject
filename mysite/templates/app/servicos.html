@@ -20,7 +20,10 @@
 
     <!--Import Font Awesome-->
     <script src="https://kit.fontawesome.com/0bcf237166.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="../../static/stylesheet/servicos.css">
+
+    {% assets "servicos_scss" %}
+        <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
+    {% endassets %}
 
     <title>Nossos serviços</title>
 </head>

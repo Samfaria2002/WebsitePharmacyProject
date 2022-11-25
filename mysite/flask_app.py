@@ -34,8 +34,11 @@ assets = Environment(app)
 # static/stylesheet/
 base = Bundle('stylesheet/base-file.scss', filters='pyscss,cssmin', output='stylesheet/base-file.css')
 main = Bundle('stylesheet/main.scss', filters='pyscss,cssmin', output='stylesheet/main.css')
+servicos = Bundle('stylesheet/servicos.scss', filters='pyscss,cssmin', output='stylesheet/servicos.css')
+
 assets.register('base_scss', base)
 assets.register('main_scss', main)
+assets.register('servicos_scss', servicos)
 
 app.register_blueprint(routes)
 
