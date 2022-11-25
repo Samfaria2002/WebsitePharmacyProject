@@ -110,7 +110,7 @@ def login():
                 flash(strErr)
                 return redirect('/login')
 
-
+        session.permanent=True
         session['pharmacyId'] = user.pharmacyId
 
         if isMobile:

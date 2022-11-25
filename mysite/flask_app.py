@@ -4,6 +4,7 @@ import os
 from dotenv import load_dotenv
 from routes import routes
 from extensions import db, migrate, ma, login_manager
+import datetime
 
 app = Flask(__name__)
 
@@ -21,6 +22,9 @@ app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
 app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config['SECRET_KEY'] = 'secret-key-goes-here'
+
+app.config['PERMANENT_SESSION_LIFETIME'] = datetime.timedelta(days=30)
+app.config['REMEMBER_COOKIE_DURATION'] = datetime.timedelta(days=30)
 
 db.init_app(app)
 migrate.init_app(app)

@@ -149,11 +149,12 @@
       console.log(el)
       table.destroy()
 
+      const total = formatCurrency.format(el.price)
       const qtd = Number(el.quantity).toFixed(0)
       document.querySelector(`.date-order[data-id="${itemId}"]`).innerText = el['data-pedido']
       document.querySelector(`.status-order[data-id="${itemId}"]`).innerText = el.status
       document.querySelector(`.total-order[data-id="${itemId}"]`).setAttribute('order-price', el.price)
-      document.querySelector(`.total-order[data-id="${itemId}"]`).innerText = el.price
+      document.querySelector(`.total-order[data-id="${itemId}"]`).innerText = total
       document.querySelector(`.qtd-item[data-id="${itemId}"]`).innerText = qtd
 
       table = $('#table_id').DataTable({
