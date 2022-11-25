@@ -3,7 +3,7 @@
 {% block content %}
 <form class="form">
   <div class="row logo-container">
-    <h1>Logo aqui</h1>
+    <img class="logo-img" src="/static/images/LogoHelpPharm.png" draggable="false">
   </div>
   <div class="row">
     <label for="email" class="form-label">Email</label>
@@ -40,6 +40,13 @@
     <button id="submit">Realizar Cadastro</button>
   </div>
 </form>
+
+<style>
+
+  .container {
+    min-height: 1100px;
+  }
+</style>
 <script>
   document.querySelector('#submit').addEventListener('click', (e) => {
     e.preventDefault()
