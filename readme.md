@@ -20,7 +20,8 @@
     * aceitar pharm null no cadastro -- ok?
     * login no mobile funcional -- ok?
     * "notification is-danger"/flash reject login --> botar de vermelhinho :D
-    
+    * add formatCurrency em estoque 
+    * add data no /api/order
 
     *** LONGO PRAZO ***
     

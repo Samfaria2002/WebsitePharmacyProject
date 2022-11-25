@@ -80,15 +80,20 @@ def login():
     if request.method == 'GET':
         return render_template('/app/login.html')
     else :
+
+        body = request.get_json()
+
+        username = request.form.get('username')
+        password = request.form.get('password')
+
         if request.args.get('ismobile') == 'true':
             isMobile = True
             tipoDeUser = 'C'
+            username = body['username']
+            password = body['password']
         else:
             isMobile = False
             tipoDeUser = 'F'
-        
-        username = request.form.get('username')
-        password = request.form.get('password')
 
         user = User.query.filter_by(userName=username, userType=tipoDeUser).first()
 
