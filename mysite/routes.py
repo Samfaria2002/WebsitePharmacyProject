@@ -81,12 +81,13 @@ def login():
         return render_template('/app/login.html')
     else :
 
-        body = request.get_json()
-
         username = request.form.get('username')
         password = request.form.get('password')
 
         if request.args.get('ismobile') == 'true':
+
+            body = request.get_json()
+
             isMobile = True
             tipoDeUser = 'C'
             username = body['username']
