@@ -102,144 +102,6 @@
 
 {% block scripts %}
   <script>
-
-  const modal = document.getElementById("modal");
-  const cancelModal = document.getElementById("modal-skip");
-
-  document.querySelector('#add-item').addEventListener('click', () => {
-    modal.classList.add("modal-visible")
-
-    document.querySelector('#modal-title').innerHTML = 'Adicionar Item'
-    document.querySelector('#modal-complete').innerHTML = 'Adicionar'
-    document.querySelector('#modal-complete').setAttribute('method', 'add')
-
-    //document.querySelector('#name').removeAttribute('disabled')
-    document.querySelector('#laboratory').value = ''
-    document.querySelector('#name').value = ''
-    document.querySelector('#price').value = ''
-    document.querySelector('#quantity').value = ''
-    document.querySelector('#delete-item').style.display = 'none'
-
-    //document.querySelector('#modal-content form').setAttribute('method', 'POST')
-    //document.querySelector('#modal-content form').setAttribute('action', '/api/add-item')
-
-  })
-
-  document.querySelector('#solicitacoes').addEventListener('click', () => {
-    location.href = 'solicitacoes'
-  })
-
-  document.querySelector('#estoque').addEventListener('click', () => {
-    location.href = 'estoque'
-  }) 
-
-  document.querySelector('#logoff').addEventListener('click', () => {
-    location.href = '/logout'
-  }) 
-
-  document.querySelector('#cadastro').addEventListener('click', () => {
-    location.href = 'cadastro'
-  }) 
-
-
-
-
-  function editItem(itemId) {
-    modal.classList.add("modal-visible")
-    document.querySelector('#modal-title').innerHTML = 'Alterar Item'
-    document.querySelector('#modal-complete').innerHTML = 'Alterar'
-    document.querySelector('#modal-complete').setAttribute('method', 'edit')
-
-    document.querySelector('#id').value = itemId
-
-    // considerar possível refatoramento dps :D
-    document.querySelector('#name').value = document.querySelector(`.name-item[data-id="${itemId}"]`).innerText
-    document.querySelector('#laboratory').value = document.querySelector(`.laboratory-item[data-id="${itemId}"]`).innerText
-    document.querySelector('#price').value = document.querySelector(`.price-item[data-id="${itemId}"]`).innerText
-    document.querySelector('#quantity').value = document.querySelector(`.qtd-item[data-id="${itemId}"]`).innerText
-    document.querySelector('#name').setAttribute('disabled', true)
-
-    document.querySelector('#delete-item').style.display = 'block'
-
-    document.querySelector('#modal-content form').setAttribute('method', 'POST')
-    document.querySelector('#modal-content form').setAttribute('action', '/api/edit-item')
-  }
-
-
-  document.querySelector('#modal').addEventListener('click', (e) => {
-    if (e.target.id === 'modal') modal.classList.remove("modal-visible")
-  })
-
-  cancelModal.addEventListener("click", (e) => {
-    e.preventDefault()
-    modal.classList.remove("modal-visible");
-  });
-
-  document.querySelector('#modal-complete').addEventListener('click', (e) => {
-    e.preventDefault()
-    // add info pra API aqui
-    let method = e.target.getAttribute('method')
-
-    let data = {}
-    let formData = new FormData(document.querySelector('#modal-content form'))
-    formData.forEach((value, key) => (data[key] = value))
-    data.unitType = 'q'
-    console.log(data)
-
-    switch(method) {
-      case 'add':
-
-        document.querySelector('#modal-complete').innerHTML = 'Adicionando...'
-        fetch('/api/remedy', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data)
-        }).then(resp => resp.json())
-        .then(resp => {
-          console.log(resp)
-          modal.classList.remove("modal-visible");
-        })
-      break;
-      case 'edit':
-      document.querySelector('#modal-complete').innerHTML = 'Alterando...'
-
-        let id = document.querySelector('#id').value
-        fetch(`/api/remedy/${id}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data)
-        }).then(resp => resp.json())
-        .then(resp => {
-          alert(resp)
-          modal.classList.remove("modal-visible");
-        })
-      break;
-    }
-
-  })
-
-  document.querySelector('#delete-btn').addEventListener('click', (e) => {
-    e.preventDefault()
-    let id = document.querySelector('#id').value
-    fetch(`/api/remedy/${id}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      }).then(resp => resp.json())
-      .then(resp => {
-        alert(resp)
-        modal.classList.remove("modal-visible");
-      })
-  })
-
-
-  </script>
-  <script>
     ;(() => {
       let page = window.location.pathname
       switch(page) {
@@ -253,6 +115,42 @@
       }
 
     })()
+  </script>
+
+  <script>
+
+    const modal = document.getElementById("modal");
+    const cancelModal = document.getElementById("modal-skip");
+
+
+    const formatCurrency = Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' })
+
+    document.querySelector('#solicitacoes').addEventListener('click', () => {
+      location.href = 'solicitacoes'
+    })
+
+    document.querySelector('#estoque').addEventListener('click', () => {
+      location.href = 'estoque'
+    }) 
+
+    document.querySelector('#logoff').addEventListener('click', () => {
+      location.href = '/logout'
+    }) 
+
+    document.querySelector('#cadastro').addEventListener('click', () => {
+      location.href = 'cadastro'
+    }) 
+
+
+
+    document.querySelector('#modal').addEventListener('click', (e) => {
+      if (e.target.id === 'modal') modal.classList.remove("modal-visible")
+    })
+
+    cancelModal.addEventListener("click", (e) => {
+      e.preventDefault()
+      modal.classList.remove("modal-visible");
+    });
   </script>
 {% endblock %}
 

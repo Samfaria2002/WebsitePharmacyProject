@@ -24,8 +24,42 @@
 
 <script>
 
-  const formatCurrency = Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' })
 
+
+  document.querySelector('form.form').innerHTML = `
+  
+    <div class="row hidden">
+      <label for="id" class="form-label">ID do Item</label>
+      <input type="text" name="id" id="id" class="form-input" placeholder="Exemplo: 001" disabled>
+    </div>
+    <div class="row">
+      <label for="data-pedido" class="form-label">Data do pedido</label>
+      <input type="date" name="data-pedido" id="data-pedido" class="form-input">
+    </div>
+    <div class="row">
+      <label for="status" class="form-label">Status da ordem</label>
+      <input type="text" name="status" id="status" class="form-input" placeholder="Exemplo: C" maxlength="1">
+    </div>
+    <div class="row">
+      <label for="price" class="form-label">Preço</label>
+      <input type="text" name="price" id="price" class="form-input" placeholder="Exemplo: 9,99">
+    </div>
+    <div class="row">
+      <label for="quantity" class="form-label">Quantidade</label>
+      <input type="text" name="quantity" id="quantity" class="form-input" placeholder="Exemplo: 999">
+    </div>
+    <div class="row" id="delete-item">
+      <button id="delete-btn">Deletar</button>
+    </div>
+    <div class="modal-buttons">
+      <button class="btn-secondary" id="modal-skip">Cancelar</button>
+      <button class="btn-primary" id="modal-complete" type="submit" method="add">Adicionar</button>
+    </div>
+  `
+
+
+
+  let table
   fetch('/api/order', {
     method: 'GET'
   })
@@ -41,10 +75,10 @@
       let tr = document.createElement('tr')
       let str = `
         <td>${el.orderId}</td>
-        <td data-id="${el.date}" class="date-order">${el.date}</td>
+        <td data-id="${el.orderId}" class="date-order">${el.date}</td>
         <td data-id="${el.orderId}" class="type-order">${el.orderType}</td>
         <td data-id="${el.orderId}" class="status-order">${el.status}</td>
-        <td data-id="${el.orderId}" class="total-order">${total}</td>
+        <td data-id="${el.orderId}" order-price="${Number(el.totalValue).toFixed(2)}" class="total-order">${total}</td>
         <td data-id="${el.orderId}" class="remedy-name">${el.name}</td>
         <td data-id="${el.orderId}" class="qtd-item">${qtd}</td>
         <td><button data-id="${el.orderId}" class="edit-item" onclick="editItem(${el.orderId})"><img src="{{url_for('static', filename='images/pencil-alt.svg')}}" alt="Edit"></button></td>
@@ -53,12 +87,107 @@
       document.querySelector('#table_id tbody').appendChild(tr)
     }
 
-    $('#table_id').DataTable({
+    table = $('#table_id').DataTable({
+      language: {
+        url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+        },
+      responsive: true
+    })
+  })
+
+
+  function editItem(itemId) {
+    modal.classList.add("modal-visible")
+    document.querySelector('#modal-title').innerHTML = 'Alterar Item'
+    document.querySelector('#modal-complete').innerHTML = 'Alterar'
+    document.querySelector('#modal-complete').setAttribute('method', 'edit')
+
+    document.querySelector('#id').value = itemId
+
+    // considerar possível refatoramento dps :D
+    document.querySelector('#data-pedido').value = document.querySelector(`.date-order[data-id="${itemId}"]`).innerText
+    document.querySelector('#status').value = document.querySelector(`.status-order[data-id="${itemId}"]`).innerText
+    document.querySelector('#price').value = document.querySelector(`.total-order[data-id="${itemId}"]`).getAttribute('order-price')
+    document.querySelector('#quantity').value = document.querySelector(`.qtd-item[data-id="${itemId}"]`).innerText
+    document.querySelector('#delete-item').style.display = 'block'
+
+    document.querySelector('#modal-content form').setAttribute('method', 'POST')
+  }
+
+
+  document.querySelector('#modal-complete').addEventListener('click', (e) => {
+    e.preventDefault()
+    document.querySelector('#modal-complete').innerHTML = 'Alterando...'
+
+    let data = {}
+    let formData = new FormData(document.querySelector('#modal-content form'))
+    formData.forEach((value, key) => (data[key] = value))
+
+    console.log(data)
+
+    let id = document.querySelector('#id').value
+    fetch(`/api/order/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    }).then(resp => resp.json())
+    .then(resp => {
+      alert(resp.msg)
+
+      if (resp.error === true) {
+        document.querySelector('#modal-complete').innerHTML = 'Alterar'
+        return
+      }
+
+      modal.classList.remove("modal-visible");
+      const el = data
+      const itemId = id
+      console.log(el)
+      table.destroy()
+
+      const qtd = Number(el.quantity).toFixed(0)
+      document.querySelector(`.date-order[data-id="${itemId}"]`).innerText = el['data-pedido']
+      document.querySelector(`.status-order[data-id="${itemId}"]`).innerText = el.status
+      document.querySelector(`.total-order[data-id="${itemId}"]`).setAttribute('order-price', el.price)
+      document.querySelector(`.total-order[data-id="${itemId}"]`).innerText = el.price
+      document.querySelector(`.qtd-item[data-id="${itemId}"]`).innerText = qtd
+
+      table = $('#table_id').DataTable({
         language: {
           url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
         },
         responsive: true
+      })
     })
   })
+
+
+  document.querySelector('#delete-btn').addEventListener('click', (e) => {
+    e.preventDefault()
+    let id = document.querySelector('#id').value
+    fetch(`/api/order/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      }).then(resp => resp.json())
+      .then(resp => {
+        alert(resp)
+
+        table.destroy()
+        document.querySelector(`td[data-id="${id}"]`).parentElement.remove()
+        table = $('#table_id').DataTable({
+            language: {
+              url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+            },
+            responsive: true
+        })
+        modal.classList.remove("modal-visible");
+      })
+  })
+
+
 </script>
 {% endblock %}

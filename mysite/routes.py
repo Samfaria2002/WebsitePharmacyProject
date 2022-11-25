@@ -78,6 +78,10 @@ def cadastro():
 def login():
 
     if request.method == 'GET':
+
+        if current_user.is_authenticated:
+            return redirect('/estoque')
+
         return render_template('/app/login.html')
     else :
 
@@ -101,7 +105,7 @@ def login():
         if not user or not user.password == password:
             strErr = 'Revise suas credenciais e tente novamente'
             if isMobile:
-                return jsonify(strErr)
+                return jsonify(strErr), 400
             else:
                 flash(strErr)
                 return redirect('/login')
@@ -197,13 +201,28 @@ def addRemedy():
         body = request.get_json()
         #print(body)
         pharmacyFromUser = session.get('pharmacyId', False)
-        if pharmacyFromUser == False: return jsonify('sem farmácia declarada'), 400
+        if pharmacyFromUser == False: return jsonify({"msg": 'sem farmácia declarada', "error": True }), 400
+
+        try:
+            body['price'] = float(body['price'])
+        except:
+            return jsonify({"msg": 'o campo preço não é um número', "error": True }), 400
+        
+        try:
+            body['quantity'] = int(body['quantity'])
+        except:
+            return jsonify({"msg": 'o campo quantidade não é um número', "error": True }), 400 
 
         # barCode=body['barCode'], 
         newRemedy = Remedy(name=body['name'], laboratory=body['laboratory'], price=body['price'], pharmacyId=pharmacyFromUser, quantity=body['quantity'], unitType=body['unitType'])
         db.session.add(newRemedy)
         db.session.commit()
-        return jsonify('criado com sucesso'), 200
+
+        res = {
+            "msg": 'produto feito com sucesso',
+            "data": remedies_schema.dump(remedies_schema.dump(Remedy.query.filter(Remedy.remedyId == newRemedy.remedyId)))
+        }
+        return jsonify(res), 200
     else:
         return jsonify('Method not found'), 400
 
@@ -213,6 +232,15 @@ def specific_remedy(id):
         body = request.get_json()
         remedy = Remedy.query.filter_by(remedyId=id).one()
         # colocar outros campos q for alterar
+
+        try:
+            body['price'] = float(body['price'])
+        except:
+            return jsonify({"msg": 'o campo preço não é um número', "error": True }), 400
+        try:
+            body['quantity'] = int(body['quantity'])
+        except:
+            return jsonify({"msg": 'o campo quantidade não é um número', "error": True }), 400 
 
         if('laboratory' in body):
             remedy.laboratory = body['laboratory']
@@ -226,12 +254,22 @@ def specific_remedy(id):
         #    return jsonify('preço não declarado')
         db.session.add(remedy)
         db.session.commit()
-        return jsonify('update feito com sucesso'), 200
+
+        res = {
+            "msg": 'update feito com sucesso',
+            "data": remedies_schema.dump(remedies_schema.dump(Remedy.query.filter(Remedy.remedyId == id)))
+        }
+
+        return jsonify(res), 200
     elif request.method == 'DELETE':
-        toDelete = Remedy.query.filter_by(remedyId=id).one()
-        db.session.delete(toDelete)
-        db.session.commit()
-        return jsonify('F no chat'), 200
+
+        try:
+            toDelete = Remedy.query.filter_by(remedyId=id).one()
+            db.session.delete(toDelete)
+            db.session.commit()
+            return jsonify('F no chat'), 200
+        except:
+            return jsonify('Não foi possível deletar esse Item. Confira se há uma solicitação em aberto com esse item e tente novamente'), 400
     else:
         return jsonify('Method not found'), 400
 
@@ -271,10 +309,25 @@ def getOrder():
     elif request.method == 'POST':
         body = request.get_json()
 
+
+        # p/ dps --> validar se user existe msm; validar totalValue
+
+        try:
+            body['totalValue'] = int(body['totalValue'])
+        except:
+            return jsonify({"msg": 'o campo preço não é um número', "error": True }), 400
+        try:
+            body['quantity'] = int(body['quantity'])
+        except:
+            return jsonify({"msg": 'o campo quantidade não é um número', "error": True }), 400 
+
+
         body['orderType'] = body['orderType'].upper()
         body['status'] = body['status'].upper()
 
-        order = Order(orderType=body['orderType'], status=body['status'], totalValue=body['totalValue'], pharmacyId=body['pharmacyId'], userId=body['userId'])
+        dataRegistro = datetime.datetime.now()
+
+        order = Order(orderType=body['orderType'], status=body['status'], totalValue=body['totalValue'], pharmacyId=body['pharmacyId'], userId=body['userId'],date=dataRegistro)
         db.session.add(order)
         db.session.commit()
         orderItem = OrderItem(quantity=body['quantity'], orderId=order.orderId, remedyId=body['remedyId'])
@@ -289,7 +342,41 @@ def specific_Order(id):
     if request.method == 'GET':
         res = orders_schema.dump(Order.query.filter_by(userId=id).one())
         return jsonify(res)
-    
+    elif 'PUT':
+        body = request.get_json()
+
+        try:
+            body['totalValue'] = float(body['price'])
+        except:
+            return jsonify({"msg": 'o campo preço não é um número', "error": True }), 400
+        try:
+            body['quantity'] = int(body['quantity'])
+        except:
+            return jsonify({"msg": 'o campo quantidade não é um número', "error": True }), 400 
+
+        order = Order.query.filter_by(orderId=id).one()
+        orderItem = OrderItem.query.filter_by(orderId=id).one()
+
+        body['status'] = body['status'].upper()
+
+        order.totalValue = body['totalValue']
+        order.date = body['data-pedido']
+        order.status = body['status']
+
+        orderItem.quantity = body['quantity']
+
+        db.session.add(order)
+        db.session.add(order)
+        db.session.commit()
+        db.session.add(orderItem)
+        db.session.commit()
+
+        # retornar obj dps
+        res = {
+            "msg": 'update feito com sucesso'
+        }
+
+        return jsonify(res)
     elif request.method == 'DELETE':
         toDeleteItem = OrderItem.query.filter_by(orderId=id).one()
         db.session.delete(toDeleteItem)
@@ -299,10 +386,3 @@ def specific_Order(id):
         return jsonify('F no chat')
     else:
         return jsonify('Method not found')
-
-
-@routes.route('/teste')
-def teste():
-    res = session.get('pharmacyId', 'num tem')
-    return jsonify(res)
-
