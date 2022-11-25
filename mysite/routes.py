@@ -28,7 +28,7 @@ def estoque():
 @routes.route('/solicitacoes')
 @login_required
 def solicitacoes():
-    return render_template('/app/solicitacoes.html')
+    return render_template('/app/solicitacoes.html', name = current_user.userName)
 
 @routes.route('/error')
 def err():
