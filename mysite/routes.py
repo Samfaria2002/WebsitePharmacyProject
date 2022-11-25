@@ -20,6 +20,10 @@ def index():
 def home():
     return render_template('/app/home.html')
 
+@routes.route('/servicos')
+def servicos():
+    return render_template('/app/servicos.html')
+
 @routes.route('/estoque')
 @login_required
 def estoque():
@@ -28,7 +32,7 @@ def estoque():
 @routes.route('/solicitacoes')
 @login_required
 def solicitacoes():
-    return render_template('/app/solicitacoes.html', name = current_user.userName)
+    return render_template('/app/solicitacoes.html')
 
 @routes.route('/error')
 def err():
@@ -110,7 +114,7 @@ def login():
                 flash(strErr)
                 return redirect('/login')
 
-        session.permanent=True
+
         session['pharmacyId'] = user.pharmacyId
 
         if isMobile:
