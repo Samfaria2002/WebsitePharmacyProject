@@ -34,8 +34,15 @@
     flask session e flask login devem ter o mesmo lifetime (session = PERMANENT_SESSION_LIFETIME, f_login = REMEMBER_COOKIE_DURATION) -- ok (sou mt bom)
     possível refatoração do modo que os dados p/ modal de edit são pego
     armazenamento em cache de certos arquivos (pasta static inteira praticamente)
+    *ATUALIZAÇÕES FRONT-END*
+    atualizar pagina de serviços(incluir carrosel nos card) -> ver opiniao da equipe
+    incluir "perguntas frequentes na pagina de "duvidas" -> ver opiniao da equipe
+    
 
     criar dashboard de admin p/ visualização de user/req, etc
         -- tipo de user = "A"
         -- uma pag extra escondida (hehe)
+        
+        
+        xX - GO GO DREAM TEAM - Xx
 
